@@ -14,7 +14,7 @@ tags:
 
 ---
 
-こんにちは、Azure Monitoring & Integration サポート チームの佐々木です。
+こんにちは、Azure Monitoring サポート チームの佐々木です。
 
 今回の記事では、Azure Monitor Private Link Scope 利用の際に必要になる IP レンジについてご説明します。
 
@@ -69,7 +69,7 @@ Log Analytics は AMPLS へ追加された Log Analytics のリージョン1つ�
 
 以下の様に同じリージョンのエンドポイントは同じ IP に割り当てられます。
 
-<img width="1314" height="374" alt="image" src="https://github.com/user-attachments/assets/0e736def-83fe-4381-aed4-727a8cfaa91c" />
+<img width="1314" height="374" alt="image" src="https://github.com/user-attachments/assets/da33ac3a-0ae1-402a-ba07-268c06732c43" />
 
 ### データ収集エンドポイント
 
@@ -108,7 +108,7 @@ Application Insights は AMPLS へ追加された Application Insights のイン
 接続文字列および \<ID> 部は Application Insights リソース作成時に自動的に決められます。
 
 Application Insights > 概要 より確認いただけます。
-<img width="1220" height="599" alt="image" src="https://github.com/user-attachments/assets/6bb136f8-20e3-4f43-b69e-d7c4b5847ff9" />
+<img width="710" height="269" alt="image" src="https://github.com/user-attachments/assets/1b1c2ebe-e50a-41ec-8767-b8bef3d11a5f" />
 
 そのため、Application Insights では接続文字列内のエンドポイントを確認ください。
 
