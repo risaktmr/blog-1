@@ -32,12 +32,12 @@ tags:
 - [5. 各機能とソリューション](#5-各機能とソリューション)
   - [5.1 データ収集](#5-1-データ収集)
     - [5.1.1 プラットフォーム メトリックとカスタム メトリック](#5-1-1-プラットフォーム-メトリックとカスタム-メトリック)
-    - [5.1.2 仮想マシンからのログ収集](#5-1-2-仮想マシンからのログ収集)
-    - [5.1.3 コンテナーからのログ収集](#5-1-3-コンテナーからのログ収集)
-    - [5.1.4 アプリケーションからのログ収集](#5-1-4-アプリケーションからのログ収集)
-    - [5.1.5 ストレージへの収集](#5-1-5-ストレージへの収集)
-    - [5.1.6 診断設定](#5-1-6-診断設定)
-    - [5.1.7 アクティビティ ログ](#5-1-7-アクティビティ-ログ)
+    - [5.1.2 アクティビティ ログ](#5-1-2-アクティビティ-ログ)
+    - [5.1.3 仮想マシンからのログ収集](#5-1-3-仮想マシンからのログ収集)
+    - [5.1.4 コンテナーからのログ収集](#5-1-4-コンテナーからのログ収集)
+    - [5.1.5 アプリケーションからのログ収集](#5-1-5-アプリケーションからのログ収集)
+    - [5.1.6 ストレージへの収集](#5-1-6-ストレージへの収集)
+    - [5.1.7 診断設定](#5-1-7-診断設定)
     - [5.1.8 データ エクスポート](#5-1-8-データ-エクスポート)
     - [5.1.9 ネットワークの監視](#5-1-9-ネットワークの監視)
   - [5.2 分析とレポート](#5-2-分析とレポート)
@@ -75,241 +75,171 @@ tags:
 <br><!-- 1章終わり--大項目の終わり <br> を追加する -->
 
 
-
 <!-- 2章始まり--大項目 -->
 ## 2. 用語集
 本項では Azure Monitor 関連製品でよく使われる用語を記載しています。
 本ブログ記事や公開情報を参照する際の参考となれば幸いです。
 
-<br>
-
-### Azure Monitor
+**Azure Monitor**
 Azure リソースやアプリケーションの状態を収集、分析、可視化、通知するための監視サービス ソリューションの総称です。
 メトリックやログの収集と可視化、アラートによる通知など、監視に必要な機能をまとめて提供しています。
 
 <br>
 
 ### ログ収集機能に関連する用語
-#### Azure Monitor エージェント (AMA)
+**Azure Monitor エージェント (AMA)**
 OS にインストールされ、ログやメトリック情報を Azure 上に送信するためのエージェントです。
 Windows 用と Linux 用があり、Azure VM の場合は拡張機能としてインストールされます。
 
-<br>
-
-#### データ収集ルール (DCR)
+**データ収集ルール (DCR)**
 Azure Monitor エージェントが収集するデータの種類や送信先を定義するルールです。
 Windows イベント ログ、Syslog、パフォーマンス カウンターなどの収集設定に利用します。
 
-<br>
-
-#### データ収集エンドポイント (DCE)
+**データ収集エンドポイント (DCE)**
 Azure Monitor エージェントやログ インジェスト API のデータ送信先となるエンドポイントです。
 ネットワーク制御や Azure Monitor Private Link Scope (AMPLS) を利用する構成で必要になる場合があります。
 
-<br>
-
-#### Azure Monitor Private Link Scope (AMPLS)
+**Azure Monitor Private Link Scope (AMPLS)**
 Azure Monitor の各リソースへのアクセスをプライベート エンドポイント経由で実現するための構成リソースです。
 Log Analytics ワークスペースや Application Insights、DCE などを AMPLS に関連付け、プライベート エンドポイント経由で通信できます。
 
-<br>
-
-#### VM Insights
+**VM Insights**
 Azure Monitor で仮想マシンのパフォーマンスや依存関係のデータを収集し監視するための機能です。
 CPU、メモリ、ディスク、ネットワークなどの情報を収集し、複数 VM の状態をまとめて確認できます。
 Azure Monitor エージェントが使用されます。
 
-<br>
-
-#### 変更履歴とインベントリ
+**変更履歴とインベントリ**
 OS 内のソフトウェア、サービス、ファイル、レジストリなどの変更情報を収集するための機能です。
 サービスの起動状態や構成変更を Log Analytics ワークスペースで確認できます。
 Change Tracking and Inventory ともよばれます。
 
-<br>
-
-#### Application Insights
+**Application Insights**
 アプリケーションの可用性、性能、利用状況、例外などを監視するための Azure Monitor の機能です。
 アプリケーションから送信されるテレメトリを収集し、ログ検索や可視化に利用できます。
 
-<br>
-
-#### 可用性テスト
+**可用性テスト**
 Application Insights で外部からアプリケーションの応答を定期的に確認する機能です。
 Web サイトや API の応答失敗や遅延を検知し、アラートに利用できます。
 
-<br>
-
-#### Container Insights
+**Container Insights**
 AKS などのコンテナー環境を監視するための Azure Monitor の機能です。
 ノード、Pod、コンテナーのログやパフォーマンス情報を収集し、分析やアラートに利用できます。
 
-<br>
-
-#### Managed Prometheus
+**Managed Prometheus**
 Prometheus 形式のメトリックを Azure Monitor ワークスペースに収集するマネージド サービスです。
 AKS などのコンテナー環境で、メトリック中心の監視をおこなう場合に利用します。
 
-<br>
-
-#### 診断設定
+**診断設定**
 Azure リソースのプラットフォーム ログやメトリックを送信するための設定です。
 Log Analytics ワークスペース、ストレージ アカウント、Event Hubs などを送信先にできます。
 
-<br>
-
-#### Log Analytics ワークスペースのデータ エクスポート機能
+**Log Analytics ワークスペースのデータ エクスポート機能**
 Log Analytics ワークスペースに収集されたログを継続的に外部へ送信する機能です。
 ストレージ アカウントや Event Hubs にデータを保管、連携したい場合に利用します。
 
-<br>
-
-#### Network Watcher
+**Network Watcher**
 Azure 仮想ネットワークの接続性や通信経路を診断、監視するためのサービスです。
 接続モニターや仮想ネットワーク フロー ログなど、ネットワーク監視に関連する機能を提供します。
 
 <br>
-<br>
-
 
 ### データの種類・呼称に関連する用語
-#### Heartbeat ログ
+**Heartbeat ログ**
 Azure Monitor エージェントが既定で Azure Monitor に定期的に送信するログです。
 一定時間 Heartbeat ログが届かないことを条件に、仮想マシンの死活監視を構成できます。
 
-<br>
-
-#### パフォーマンス カウンター
+**パフォーマンス カウンター**
 Windows や Linux の OS が持つ CPU、メモリ、ディスクなどの性能値です。
 仮想マシン ゲストのパフォーマンス監視で、Log Analytics ワークスペースに収集して分析できます。
 
-<br>
-
-#### アクティビティ ログ
+**アクティビティ ログ**
 Azure リソースに対する管理操作やサービス正常性イベントを記録するサブスクリプション単位のログです。
 誰が、いつ、どのリソースに対して操作したかを確認できます。
 
-<br>
 
-#### プラットフォーム メトリック
+**プラットフォーム メトリック**
 Azure リソースから自動的に収集されるメトリックです。
 仮想マシンではホスト側の CPU、ディスク、ネットワークなどの状態を追加エージェントなしで確認できます。
 
-<br>
-
-#### カスタム メトリック
+**カスタム メトリック**
 利用者やエージェントが任意に送信するメトリックです。
 仮想マシンのゲスト OS 内のパフォーマンス情報など、標準のプラットフォーム メトリックでは取得できない値を扱えます。
 
-<br>
-
-#### ゲスト OS メトリック
+**ゲスト OS メトリック**
 仮想マシンの OS 内部から収集する CPU、メモリ、ディスクなどのパフォーマンス情報です。
 Azure Monitor エージェントとデータ収集ルールを使って収集します。
 カスタム メトリックの一種に該当します。
 
-<br>
-
-#### テレメトリ
+**テレメトリ**
 アプリケーションやサービスから送信される要求、例外、依存関係、トレースなどの監視データです。
 Application Insights では、これらのデータをもとに性能分析や障害調査をおこないます。
 
 <br>
-<br>
 
 ### データの分析・可視化に関連する用語
-#### Log Analytics ワークスペース
+**Log Analytics ワークスペース**
 Azure Monitor ログを保存し、KQL で検索や分析をおこなうためのデータ ストアです。
 仮想マシン、コンテナー、アプリケーションなど、複数のリソースのログを集約できます。
 
-<br>
-
-#### ストレージ アカウント
+**ストレージ アカウント**
 Azure のログやメトリックを長期保管するために利用できるストレージ サービスです。
 診断設定やデータ エクスポートの送信先として指定できます。
 
-<br>
-
-#### Kusto Query Language (KQL)
+**Kusto Query Language (KQL)**
 Log Analytics ワークスペースや Application Insights に収集したログを検索、集計、分析するためのクエリ言語です。
 ログ アラート ルールやワークブックで条件判定や可視化をおこなう際にも利用します。
 
-<br>
-
-#### サービス正常性
+**サービス正常性**
 Azure サービス側の障害、メンテナンス、正常性勧告を確認するための機能です。
 利用中のリージョンやサービスに影響するイベントを把握し、通知を構成できます。
 
-<br>
-
-#### リソース正常性
+**リソース正常性**
 個々の Azure リソースが利用可能な状態かを確認するための機能です。
 仮想マシンやストレージ アカウントなど、リソース単位の停止や性能低下の切り分けに利用します。
 
-<br>
-
-#### メトリック エクスプローラー
+**メトリック エクスプローラー**
 Azure Monitor メトリック (プラットフォーム メトリック、カスタム メトリック) をグラフで表示し、期間や集計方法を変えて確認するための画面です。
 リソースの性能傾向を把握し、メトリック アラートの条件検討にも利用できます。
 
-<br>
-
-#### ワークブック
+**ワークブック**
 Azure Monitor のログ、メトリック、テキスト、パラメーターを組み合わせて可視化する機能です。
 監視データの分析画面や運用レポートを柔軟に作成できます。
 
-<br>
-
-#### ダッシュボード
+**ダッシュボード**
 Azure ポータル上で複数のリソースや監視グラフをまとめて表示するための画面です。
 メトリック、ログ クエリ、ワークブックなどを配置して運用状況を確認できます。
 
-<br>
-
-#### コスト分析
+**コスト分析**
 Log Analytics ワークスペースのデータ取り込み量や保存期間を確認し、利用料金を把握する作業です。
 テーブルごとのデータ量や課金対象データを確認して、収集設定の見直しに役立てます。
 
 <br>
-<br>
-
 
 ### 監視・通知に関連する用語
-#### アラート ルール
+**アラート ルール**
 メトリック、ログ、アクティビティ ログなどの条件を評価し、異常を検知するための機能です。
 条件に一致した場合は、アクション グループを通じて通知や自動処理を実行できます。
 
-<br>
-
-#### ログ アラート ルール
+**ログ アラート ルール**
 Log Analytics ワークスペースや Application Insights の KQL クエリ結果を条件にするアラートです。
 ログ内の特定イベント、文字列、集計値などをもとに異常を検知できます。ログ検索アラート ルールとも呼ばれます。
 
-<br>
-
-#### メトリック アラート ルール
+**メトリック アラート ルール**
 Azure Monitor メトリックの値を条件にするアラート ルールです。
 CPU 使用率や応答時間など、数値データのしきい値監視に利用します。
 
-<br>
-
-#### アクティビティ ログ アラート ルール
+**アクティビティ ログ アラート ルール**
 Azure サブスクリプション内の管理操作やサービス正常性イベントを条件にするアラート ルールです。
 リソースの作成、削除、停止、障害通知などのイベントを検知・通知できます。
 
-<br>
-
-#### アクション グループ
+**アクション グループ**
 アラート発生時の通知先や実行するアクションをまとめた設定です。
 メール、SMS、Webhook、Azure Functions などへの通知や連携に利用します。
 
-<br>
-
-#### オートスケール
+**オートスケール**
 メトリックやスケジュールを条件に、リソースのインスタンス数を自動で増減する機能です。
 負荷に応じて性能を確保しながら、不要なコストを抑えるために利用します。
 
-<br>
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
@@ -453,13 +383,66 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 <br>
 
 ### 4.1 仮想マシンの死活監視
-本文を入力
+本項では Azure VM が期待どおり稼働しているかを確認し、VM の停止や OS からの応答を検知する死活監視について記載します。
+Azure Monitor における Azure VM の死活監視では、Azure 基盤側とゲスト OS 側の２つのレイヤーがあり、レイヤー毎に監視対象や方法が異なります。
+
+■ Azure 基盤側の監視
+VM の可用性メトリックやリソース正常性の監視を死活監視に利用する方法です。
+VM の可用性メトリック (VM Availability Metric) は Azure 基盤側のメトリック情報であり、VM の利用状況を示します。
+メトリックの値が 1 の場合は VM が実行中で利用可能な状態です。VM のシャットダウンや再起動をおこなった場合は、値が 0 となります。
+
+※ VM の可用性メトリックを表示した例
+![](./StartUpGuide/4-1_VMAvailabilityMetric.png)
+
+Azure 基盤側のメトリックは、可用性だけでなく CPU 使用率等のパフォーマンス データについても確認することが可能ですが、この点については次項でご紹介します。
+
+リソース正常性は Azure 基盤側から対象のリソースに何らかの問題が起きている場合に知らせる機能であり、この情報をもとに監視をおこないます。リソース正常性については 「5.2.5 サービス正常性アラートとリソース正常性アラート」をご参照ください。
+
+<br>
+
+■ Azure VM の OS 側の監視
+Azure VM のゲスト OS 内で動作するエージェントが収集する、Heartbeat ログや OS のメトリックを監視する方法です。
+Heartbeat ログの収集状況から、一定時間ログが届かない場合にはエージェントの停止やネットワークの異常等の問題が発生している可能性を検知することが可能です。
+
+ワークブックを利用すると、複数の VM の稼働状態や Heartbeat ログの有無を一覧で視覚化することもできます。
+ワークブックについては、「5.3 可視化」をご参照ください。
+
+※ Heartbeat ログの収集状況をワークブックで可視化した例
+![](./StartUpGuide/4-1_HeartbeatWorkbook.png)
+
+
+また、Azure 基盤側と OS 側を問わず、前述したシグナルはアラート ルールの条件として設定し、メール通知することもできます。
+アラート ルールについては 「4.6 アラート ルールの設定」をご参照ください。
+
+
+これらの監視方法を組み合わせることで、より信頼性の高い死活監視を構成することが可能です。
+Azure VM の死活監視については詳細を以下のブログ記事でご紹介していますのであわせてご参照ください。
+[Azure VM における死活監視の考え方 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/MonitorVM02/)
+
+
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
 
 ### 4.2 仮想マシン ホストのパフォーマンス監視
-本文を入力
+前項 4.1 で紹介した Azure 基盤側のメトリック情報を利用して、Azure VM のパフォーマンス監視をおこなうことができます。
+
+※ Azure VM の CPU と メモリの使用率を表示した例
+![](./StartUpGuide/4-2_HeartbeatMetric.png)
+
+Azure 基盤側で収集されるメトリックはプラットフォーム メトリックと呼ばれます。
+プラットフォーム メトリックは Azure 基盤上のハイパーバイザー層から自動的に収集されるため、Azure VM の作成後に追加構成をおこなうことなく利用できる点が大きな特徴です。
+このため、お客様の要件によりゲスト OS にエージェントをインストールできない場合にも有用です。
+
+Azure VM でサポートされているプラットフォーム メトリックの一覧は以下の公開情報をご参照ください。
+[サポートされているメトリック - Microsoft.Compute/virtualMachines - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-compute-virtualmachines-metrics)
+
+プラットフォーム メトリックは Azure 基盤側から見える CPU、メモリ、ディスク I/O、ネットワークなどの監視に向いています。
+たとえば Windows OS 内の C ドライブの空き容量を監視したい、といった場合には、各ドライブの空き容量を示すメトリックがプラットフォーム メトリックとして提供されていないため、このシナリオではプラットフォーム メトリックを利用した監視は適しません。
+
+サポートされていないメトリックやより詳細なゲスト OS の情報を監視したい場合には、ゲスト OS 内のエージェントが収集するゲスト メトリックやログを利用します。
+プラットフォーム メトリックは Azure ポータルの監視画面での確認や、本項 4.6 で紹介するアラート ルールを設定することで、特定の条件に一致した場合に利用者へ通知をおこなうこともできます。
+
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
@@ -579,7 +562,7 @@ Azure Monitor には、各種 Azureサービスやリソースを監視する機
 ![](./StartUpGuide/4-6_actgrp_mail_alertschema.png)
 
 
-アラート ルールの種類やアクション グループの詳細は、下記の公開情報をご覧ください。
+アラート ルールの種類やアクション グループの詳細は、下記の公開情報をご参照ください。
 [Azure Monitor の警告の概要 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-overview#types-of-alerts)
 [Azure Monitor アラートの種類 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-types)
 [Azure Monitor でアクション グループを作成および管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups)
@@ -597,7 +580,7 @@ Azure Monitor には、各種 Azureサービスやリソースを監視する機
 ![](./StartUpGuide/4-7-servicehealth_serviceissue.png)
 
 
-サービス正常性の概要は、下記の公開情報をご覧ください。
+サービス正常性の概要は、下記の公開情報をご参照ください。
 [Azure Service Health のドキュメント - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/)
 [Azure Service Health 通知の概要 - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/service-health-notifications-properties)
 
@@ -609,8 +592,10 @@ Azure Monitor には、各種 Azureサービスやリソースを監視する機
 
 <!-- 大項目 -->
 ## 5. 各機能とソリューション
+本項目の説明
+
 ### 5.1 データ収集
-本項目の説明?
+本項目の説明
 
 <br>
 
@@ -646,9 +631,53 @@ Azure で扱われるメトリックには以下の 3 種類があります。
 
 <br><!-- 小項目の終わり <br> を追加する -->
 
+### 5.1.2 アクティビティ ログ
+アクティビティ ログには各 Azure リソースの操作等のログ、サービス正常性、リソース正常性があります。
+
+<br>
+
+#### アクティビティ ログ (操作等のログ)
+[モニター (監視)] > [アクティビティ ログ] にてサブスクリプション内の Azure リソースに対して実行された操作等のログの一覧を確認できます。
+![](./StartUpGuide/5-1-7_activitylog1.png)
+<!--<5-1-7_activitylog1.png>-->
+
+既定ではアクティビティ ログの保持期間は 90 日間です。
+90 日以上さかのぼって確認するためには、上図の [診断設定] からサブスクリプション スコープで診断設定を作成します。
+
+[Azure Monitor アクティビティ ログ - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/platform/activity-log?tabs=log-analytics#export-activity-log)
+[Azure Monitor の各種データの保持期間について | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/AzureMonitorEssential/MonitorRetentionPeriod/)
+
+<br>
+
+#### サービス正常性
+サービス正常性では ご利用の Azure サービスの障害や計画メンテナンス、サービスの廃止などのイベントについて表示します。
+[監視/モニター] > [サービス正常性] > [有効なイベント] もしくは [履歴] をクリックして確認します。
+[有効なイベント] には現時点でアクティブなサービス正常性が表示され、[履歴] には過去 のサービス正常性イベントが表示されます。
+![](./StartUpGuide/5-1-7_activitylog2.png)
 
 
-### 5.1.2 仮想マシンからのログ収集
+![](./StartUpGuide/5-1-7_activitylog3.png)
+
+[Azure Service Health ポータル - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/service-health-portal-update)
+
+<br>
+
+#### リソース正常性
+リソース正常性では、ご利用の Azure リソースが正常であるかどうかを評価し、リソースの状態が [利用可能 (Available)]、[使用不可 (Unavailable)]、[不明 (Unknown)]、[低下 (Degraded)] のいずれかの状態と表示します。
+[監視/モニター] > [サービス正常性] > [リソース正常性] にて、確認したいリソースの種類を指定して確認します。
+![](./StartUpGuide/5-1-7_activitylog4.png)
+
+![](./StartUpGuide/5-1-7_activitylog5.png)
+
+
+[Azure Resource Health の概要 - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/resource-health-overview).
+
+
+<br><!-- 小項目の終わり <br> を追加する -->
+
+
+
+### 5.1.3 仮想マシンからのログ収集
 #### Azure Monitor エージェントとデータ収集ルールとは
 Azure 仮想マシン (Azure VM) からログを収集するための主な手段は、Azure Monitor エージェントとデータ収集ルールを使用する方法です。それぞれを一言で表現すると、Azure Monitor エージェント (AMA) とは VM 上でデータを集めて送信するもので、データ収集ルール (DCR) とは AMA が収集するデータとその送信先を指定するものです。
 
@@ -746,14 +775,16 @@ Azure Monitor エージェントの自動アップグレードを有効化する
 
 
 
-### 5.1.3 コンテナーからのログ収集
+
+### 5.1.4 コンテナーからのログ収集
 本文を入力
 
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
 
-### 5.1.4 アプリケーションからのログ収集
+
+### 5.1.5 アプリケーションからのログ収集
 Application Insights は、アプリケーションのパフォーマンスを監視するサービスです。
 Web アプリや API が
 - 正常に動いているか
@@ -772,7 +803,7 @@ Web アプリや API が
 
 
 収集したデータの分析方法および可視化方法の詳細は、
-本記事の [5.2.8 Application Insights のクエリ](#5-2-8-Application-Insights-のクエリ)と [5.3.4 Application Insights の可視化](#5-3-4-Application-Insights-の可視化) をご覧ください。
+本記事の [5.2.8 Application Insights のクエリ](#5-2-8-Application-Insights-のクエリ)と [5.3.4 Application Insights の可視化](#5-3-4-Application-Insights-の可視化) をご参照ください。
 
 また、Azure App Service や Azure VM などの Azure サービスに加えて、オンプレミスのサーバーで動作するアプリケーションからもログを収集できます。Application Insights の詳細については、以下の弊社公開情報をご参照ください。
 [Application Insights OpenTelemetry の可観測性の概要 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/app/app-insights-overview)
@@ -818,15 +849,15 @@ Web アプリや API が
 
 
 
-### 5.1.5 ストレージへの収集
+### 5.1.6 ストレージへの収集
 本文を入力
 
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
 
-### 5.1.6 診断設定
 
+### 5.1.7 診断設定
 #### 診断設定とは
 診断設定を使用することで、各 Azure リソースから出力される以下のデータを指定した宛先に送信することができます。
 - アクティビティ ログ
@@ -922,49 +953,6 @@ Log Analytics ワークスペースに収集した場合は以下のように確
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-### 5.1.7 アクティビティ ログ
-アクティビティ ログには各 Azure リソースの操作等のログ、サービス正常性、リソース正常性があります。
-
-#### アクティビティ ログ (操作等のログ)
-[モニター (監視)] > [アクティビティ ログ] にてサブスクリプション内の Azure リソースに対して実行された操作等のログの一覧を確認できます。
-![](./StartUpGuide/5-1-7_activitylog1.png)
-<!--<5-1-7_activitylog1.png>-->
-
-既定ではアクティビティ ログの保持期間は 90 日間です。
-90 日以上さかのぼって確認するためには、上図の [診断設定] からサブスクリプション スコープで診断設定を作成します。
-
-[Azure Monitor アクティビティ ログ - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/platform/activity-log?tabs=log-analytics#export-activity-log)
-[Azure Monitor の各種データの保持期間について | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/AzureMonitorEssential/MonitorRetentionPeriod/)
-
-<br>
-
-#### サービス正常性
-サービス正常性では ご利用の Azure サービスの障害や計画メンテナンス、サービスの廃止などのイベントについて表示します。
-[監視/モニター] > [サービス正常性] > [有効なイベント] もしくは [履歴] をクリックして確認します。
-[有効なイベント] には現時点でアクティブなサービス正常性が表示され、[履歴] には過去 のサービス正常性イベントが表示されます。
-![](./StartUpGuide/5-1-7_activitylog2.png)
-
-
-![](./StartUpGuide/5-1-7_activitylog3.png)
-
-[Azure Service Health ポータル - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/service-health-portal-update)
-
-<br>
-
-#### リソース正常性
-リソース正常性では、ご利用の Azure リソースが正常であるかどうかを評価し、リソースの状態が [利用可能 (Available)]、[使用不可 (Unavailable)]、[不明 (Unknown)]、[低下 (Degraded)] のいずれかの状態と表示します。
-[監視/モニター] > [サービス正常性] > [リソース正常性] にて、確認したいリソースの種類を指定して確認します。
-![](./StartUpGuide/5-1-7_activitylog4.png)
-
-![](./StartUpGuide/5-1-7_activitylog5.png)
-
-
-[Azure Resource Health の概要 - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/resource-health-overview).
-
-
-<br><!-- 小項目の終わり <br> を追加する -->
-
-
 
 ### 5.1.8 データ エクスポート
 #### データ エクスポートとは
@@ -986,8 +974,7 @@ GRS、GZRS など、ストレージ アカウントの冗長オプションを�
 [Azure Blob Storage ライフサイクル管理の概要 - Azure Blob Storage | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/storage/blobs/lifecycle-management-overview)
 [ライフサイクル管理ポリシーを構成する - Azure Blob Storage | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/storage/blobs/lifecycle-management-policy-configure?tabs=azure-portal)
 
-
-ストレージ アカウント上にエクスポートされたJSON ファイル内のデータは、KQL の [externaldata operator](https://learn.microsoft.com/en-us/kusto/query/externaldata-operator?view=microsoft-fabric)を使用することでクエリすることが可能です。詳細は、[5.2.7 ストレージ アカウントに収集したデータの可視化](#5-2-7-ストレージ-アカウントに収集したデータの可視化)をご覧ください。
+ストレージ アカウント上にエクスポートされたJSON ファイル内のデータは、KQL の [externaldata operator](https://learn.microsoft.com/en-us/kusto/query/externaldata-operator?view=microsoft-fabric)を使用することでクエリすることが可能です。詳細は、[5.2.7 ストレージ アカウントに収集したデータの可視化](#5-2-7-ストレージ-アカウントに収集したデータの可視化)をご参照ください。
 
 
 <br>
@@ -999,14 +986,11 @@ Azure サービスおよびその他のツールとの統合: Event Hubs にエ�
 
 #### データ エクスポート機能の利用開始方法
 はじめに、以下の制限事項、およびデータ エクスポート ルール作成者に必要なアクセス許可が付与されていることをご確認ください。
+データ エクスポート ルールの必要な権限や制限、作成手順の詳細については以下をご参照ください。
 [Azure Monitor の Log Analytics データ エクスポート - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/logs-data-export?tabs=portal-1%2Cportal-2#limitations)
 
 
-データ エクスポート ルールの作成手順については以下をご参照ください。
-[Azure Monitor の Log Analytics ワークスペース データ エクスポート | データ エクスポートを有効にする - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/logs-data-export?tabs=portal#enable-data-export)
-
-一部のテーブルはデータ エクスポート機能がサポートされていないため、ご注意ください。
-サポート対象外のテーブルは以下より確認いただけます。
+一部のテーブルはデータ エクスポート機能がサポートされていないため、ご注意ください。サポート対象外のテーブルは以下より確認いただけます。
 [Log Analytics workspace data export in Azure Monitor | Unsupported tables - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-monitor/logs/logs-data-export?tabs=portal#unsupported-tables)
 
 
@@ -1112,11 +1096,11 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 アラートが発報した時に通知する方法や、実行するアクションは「アクション グループ」で設定します。
 アラート ルールにアクション グループを関連付けると、メールや電話、SMS で通知したり、Webhook などの自動アクションを実行することが可能です。
 
-※ 以下例は [Azure Monitor のアクション グループ](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#create-an-action-group-in-the-azure-portal)で共通アラート スキーマを有効化した時に通知されたメールです。
+※ 以下例はアクション グループで共通アラート スキーマを有効化した時に通知されたメールです。
 ![](./StartUpGuide/5-2-2_logalert_heartbeat_actiongrp.png)
 
 
-ログ アラート ルールの設定手順などは、公開情報やブログをご覧ください。
+ログ アラート ルールの設定手順などは、公開情報やブログをご参照ください。
 [Azure Monitor のログ検索アラート ルールを作成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-create-log-alert-rule)
 [Azure Monitor でアクション グループを作成および管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups)
 [Azure Monitor のアラートに関するよくあるご質問 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/AzureMonitorEssential/MonitorAlertFAQ/#%E3%83%AD%E3%82%B0-%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88-%E3%83%AB%E3%83%BC%E3%83%AB)
@@ -1133,23 +1117,20 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 監視する Azure リソースや[メトリック](https://learn.microsoft.com/ja-jp/azure/azure-monitor/metrics/data-platform-metrics)を決め、しきい値などの監視条件を指定します。
 例 : Azure VM の CPU 使用率が 80% を超えているかどうか
 ![](./StartUpGuide/5-2-3_metric_percentagecpu.png)
-<!--<5-2-3_metric_percentagecpu.png>-->
 
 メトリック アラート ルールは、指定されたルックバック期間（評価期間）のメトリックを対象に、しきい値を満たしているかどうかを定期的に評価します。メトリックの値がしきい値（例：PercentageCpu > 80）を満たすと、アラートが発報します。
 ![](./StartUpGuide/5-2-3_metricalert_percentagecpu_portal.png)
-<!--<5-2-3_metricalert_percentagecpu_portal.png>-->
 
 
 **2. 通知や自動アクションを実行する**
 アラートが発報した時に通知する方法や、実行するアクションは「アクション グループ」で設定します。
 アラート ルールにアクション グループを関連付けると、メールや電話、SMS で通知したり、Webhook などの自動アクションを実行することが可能です。
 
-※ 以下例は [Azure Monitor のアクション グループ](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#create-an-action-group-in-the-azure-portal)で共通アラート スキーマを有効化した時に通知されたメールです。
+※ 以下例はアクション グループで共通アラート スキーマを有効化した時に通知されたメールです。
 ![](./StartUpGuide/5-2-3_metricalert_percentagecpu_actiongrp.png)
-<!--<5-2-3_metricalert_percentagecpu_actiongrp.png>-->
 
 
-メトリック アラート ルールの設定手順などは、公開情報やブログをご覧ください。
+メトリック アラート ルールの設定手順などは、公開情報やブログをご参照ください。
 [Azure Monitor のメトリック警告ルールを作成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-create-metric-alert-rule)
 [Azure Monitor でアクション グループを作成および管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups)
 [Azure Monitor のアラートに関するよくあるご質問 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/AzureMonitorEssential/MonitorAlertFAQ/#%E3%83%A1%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF-%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88-%E3%83%AB%E3%83%BC%E3%83%AB)
@@ -1164,26 +1145,24 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 
 
 **1. 条件に一致するアクティビティ ログが記録されているかどうかを評価する**
-監視する Azure リソースや[アクティビティ ログ](https://learn.microsoft.com/ja-jp/azure/azure-monitor/platform/activity-log?tabs=log-analytics)の条件を決めます。
+監視する Azure リソースやアクティビティ ログの条件を決めます。
 例 : Azure VM の割り当て解除 (Deallocate Virtual Machine)
 ![](./StartUpGuide/5-2-4_activitylog.png)
-<!--<5-2-4_activitylog.png>-->
 
 
 アクティビティ ログ アラートは、指定した条件に一致するアクティビティ ログ イベントが発生しているかどうかを評価します。監視対象の Azure リソースで条件に一致するアクティビティ ログが記録されると、アラートが発報します。
 ![](./StartUpGuide/5-2-4_activitylogalert-portal.png)
-<!--<5-2-4_activitylogalert-portal.png>-->
 
 
 **2. 通知や自動アクションを実行する**
 アラートが発報した時に通知する方法や、実行するアクションは「アクション グループ」で設定します。
 アラート ルールにアクション グループを関連付けると、メールや電話、SMS で通知したり、Webhook などの自動アクションを実行することが可能です。
 
-※ 以下例は [Azure Monitor のアクション グループ](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#create-an-action-group-in-the-azure-portal)で共通アラート スキーマを有効化した時に通知されたメールです。
+※ 以下例はアクション グループで共通アラート スキーマを有効化した時に通知されたメールです。
 ![](./StartUpGuide/5-2-4_activitylogalert_actiongrp.png)
 
 
-アクティビティ ログ アラートの設定手順などは、公開情報やブログをご覧ください。
+アクティビティ ログ アラートの設定手順などは、公開情報やブログをご参照ください。
 [アクティビティ ログ、サービス正常性、またはリソース正常性の警告ルールを作成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-create-activity-log-alert-rule?tabs=activity-log)
 [Azure Monitor のアラートに関するよくあるご質問 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/AzureMonitorEssential/MonitorAlertFAQ/#%E3%83%AD%E3%82%B0-%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88-%E3%83%AB%E3%83%BC%E3%83%AB)
 
@@ -1199,7 +1178,7 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 
 
 **1. 条件に一致するアクティビティ ログが記録されているかどうかを評価する**
-[監視する Azure サービスやリージョン、イベントの種類を決めます](https://learn.microsoft.com/ja-jp/azure/service-health/alerts-activity-log-service-notifications-portal#alert-and-new-action-group-using-azure-portal)。サービス正常性アラートは、ご利用いただいているサービスのご利用いただいているリージョンを対象としたイベントが発生した場合にのみ通知が行われる仕組みのため、"サービス" や "リージョン" はすべて選択いただくことを推奨しております。
+監視する Azure サービスやリージョン、イベントの種類を決めます。サービス正常性アラートは、ご利用いただいているサービスのご利用いただいているリージョンを対象としたイベントが発生した場合にのみ通知が行われる仕組みのため、"サービス" や "リージョン" はすべて選択いただくことを推奨しております。
 ![](./StartUpGuide/5-2-5_servicehealthalert_settings.png)
 
 例. Azure OpenAI Service の正常性の勧告
@@ -1215,12 +1194,12 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 アラート ルールにアクション グループを関連付けると、メールや電話、SMS で通知したり、Webhook などの自動アクションを実行することが可能です。
 
 
-※ 以下例は [Azure Monitor のアクション グループ](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#create-an-action-group-in-the-azure-portal) によって通知されたメールです。
+※ 以下例は Azure Monitor のアクション グループによって通知されたメールです。
 ![](./StartUpGuide/5-2-5_servicehealthalert-actiongrp.png)
 <!--<5-2-5_servicehealthalert-actiongrp.png>-->
 
 サービス正常性アラートにつきましては、別途サポート ブログを作成しております。
-サービス正常性アラートの設定手順などは、ブログや公開情報をご覧ください。
+サービス正常性アラートの設定手順などは、ブログや公開情報をご参照ください。
 [サービス正常性アラートの設定手順と推奨設定について | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/ame/HowToSetUpServiceHealthAlertsAndRecommendedSettings/)
 [Azure ポータル で Azure サービス通知の Service Health アラートを作成する - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/alerts-activity-log-service-notifications-portal)
 
@@ -1231,7 +1210,7 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 リソースの正常性に変化が生じた際に、メールや SMS 等の方法で通知することが可能です。サービス正常性アラートはAzure サービスおよびリージョンを監視対象としますが、リソース正常性アラートはお客様環境の固有のリソースを監視します。監視対象のスコープが異なるとご認識ください。
 
 **1. 条件に一致するアクティビティ ログが記録されているかどうかを評価する**
-[監視する Azure リソースや監視条件を決めます](https://learn.microsoft.com/ja-jp/azure/service-health/resource-health-alert-arm-template-guide)。
+監視する Azure リソースや監視条件を決めます。
 ![](./StartUpGuide/5-2-5_resourcehealthalert_settings.png)
 
 
@@ -1247,12 +1226,12 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 アラートが発報した時に通知する方法や、実行するアクションは「アクション グループ」で設定します。
 アラート ルールにアクション グループを関連付けると、メールや電話、SMS で通知したり、Webhook などの自動アクションを実行することが可能です。
 
-※ 以下例は [Azure Monitor のアクション グループ](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#create-an-action-group-in-the-azure-portal)で共通アラート スキーマを有効化した時に通知されたメールです。
+※ 以下例は Azure Monitor のアクション グループで共通アラート スキーマを有効化した時に通知されたメールです。
 ![](./StartUpGuide/5-2-5_resourcehealthalert-actiongrp.png)
 
 
 リソース正常性アラートにつきましては、別途サポート ブログを作成しております。
-リソース正常性アラートの設定手順などは、ブログや公開情報をご覧ください。
+リソース正常性アラートの設定手順などは、ブログや公開情報をご参照ください。
 [リソース正常性アラートに関するよくあるご質問](https://jpazmon-integ.github.io/blog/AzureMonitorEssential/ResourceHealthAlert/)
 [Resource Health アラートを作成する方法 - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/resource-health-alert-arm-template-guide)
 
@@ -1687,7 +1666,7 @@ Log Analytics ワークスペースから対象データを完全に削除しま
 
 <br>
 
-GDPR（EU 一般データ保護規則）の要件に準拠する必要がある場合は Purge API、それ以外の場合は基本的に Delete Data API をご利用ください。REST API の実行手順や前提条件は、下記の公開情報やサポート ブログをご覧ください。
+GDPR（EU 一般データ保護規則）の要件に準拠する必要がある場合は Purge API、それ以外の場合は基本的に Delete Data API をご利用ください。REST API の実行手順や前提条件は、下記の公開情報やサポート ブログをご参照ください。
 
 [Azure Monitor ログで個人データを管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/personal-data-mgmt)
 [Log Analytics ワークスペースのデータを削除する方法 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/LogAnalyticsWorkspacePurge/)
