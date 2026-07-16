@@ -75,6 +75,7 @@ tags:
 <br><!-- 1章終わり--大項目の終わり <br> を追加する -->
 
 
+
 <!-- 2章始まり--大項目 -->
 ## 2. 用語集
 本項では Azure Monitor 関連製品でよく使われる用語を記載しています。
@@ -354,6 +355,7 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 <br><!-- 2章終わり--大項目の終わり <br> を追加する -->
 
 
+
 <!-- 大項目 -->
 ## 3. 概念
 本項目の説明
@@ -372,7 +374,6 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 <br><!-- 小項目の終わり <br> を追加する -->
 <br><!-- 大項目の終わり <br> を追加する -->
-
 
 
 
@@ -423,7 +424,6 @@ Azure VM の死活監視については詳細を以下のブログ記事でご�
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 4.2 仮想マシン ホストのパフォーマンス監視
 前項 4.1 で紹介した Azure 基盤側のメトリック情報を利用して、Azure VM のパフォーマンス監視をおこなうことができます。
 
@@ -446,7 +446,6 @@ Azure VM でサポートされているプラットフォーム メトリック�
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 4.3 Azure VM のゲスト OS のパフォーマンス監視
 前項 [4.2 仮想マシン ホストのパフォーマンス監視](#4-2-仮想マシン-ホストのパフォーマンス監視) で紹介した Azure VM のプラットフォーム メトリックでは取得できないゲスト OS 内部の詳細なパフォーマンス情報を監視したい場合は、エージェントが収集するゲスト OS のパフォーマンス情報 (カスタム メトリックと呼ばれます) を利用して監視をおこないます。
 
@@ -456,7 +455,6 @@ Azure VM のプラットフォーム メトリックの場合と同様に、収�
 
 ※ Windows のパフォーマンス カウンター情報を AMA により収集した例
 ![](./StartUpGuide/4-3_VM_GuestMetric.png)
-
 
 <br>
 
@@ -486,7 +484,6 @@ Azure 基盤側から VM 全体の状態をプラット フォーム メトリ�
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 4.4 仮想マシン ログの監視
 前項 [4.3 Azure VM のゲスト OS のパフォーマンス監視](#4-3-Azure-VM-のゲスト-OS-のパフォーマンス監視)で触れた Azure Monitor エージェント (AMA) を利用することで、ゲスト OS のログ情報を収集し、監視することも可能です。
 
@@ -511,12 +508,10 @@ AMA により収集可能なログ種については、本記事 [5.1.2 仮想�
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 4.5 OS 内のサービス監視
 本文を入力
 
 <br><!-- 小項目の終わり <br> を追加する -->
-
 
 
 ### 4.6 アラート ルールの設定
@@ -570,7 +565,6 @@ Azure Monitor には、各種 Azureサービスやリソースを監視する機
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 4.7 サービス正常性
 サービス正常性では、Azure サービス正常性のイベント（サービスに関する問題、計画メンテナンス、正常性の勧告、セキュリティ アドバイザリ、課金情報の更新）の情報を提供する機能です。ご利用いただいている Azure サービスおよびリージョンに影響がある正常性イベントが発生すると、Azure ポータル > サービスの正常性に情報が表示されます。
 ![](./StartUpGuide/4-7_servicehealth_portal.png)
@@ -589,7 +583,6 @@ Azure Monitor には、各種 Azureサービスやリソースを監視する機
 
 
 
-
 <!-- 大項目 -->
 ## 5. 各機能とソリューション
 本項目の説明
@@ -598,6 +591,7 @@ Azure Monitor には、各種 Azureサービスやリソースを監視する機
 本項目の説明
 
 <br>
+
 
 #### 5.1.1 プラットフォーム メトリックとカスタム メトリック
 Azure で扱われるメトリックには以下の 3 種類があります。
@@ -630,6 +624,7 @@ Azure で扱われるメトリックには以下の 3 種類があります。
 
 
 <br><!-- 小項目の終わり <br> を追加する -->
+
 
 ### 5.1.2 アクティビティ ログ
 アクティビティ ログには各 Azure リソースの操作等のログ、サービス正常性、リソース正常性があります。
@@ -676,7 +671,6 @@ Azure で扱われるメトリックには以下の 3 種類があります。
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 5.1.3 仮想マシンからのログ収集
 #### Azure Monitor エージェントとデータ収集ルールとは
 Azure 仮想マシン (Azure VM) からログを収集するための主な手段は、Azure Monitor エージェントとデータ収集ルールを使用する方法です。それぞれを一言で表現すると、Azure Monitor エージェント (AMA) とは VM 上でデータを集めて送信するもので、データ収集ルール (DCR) とは AMA が収集するデータとその送信先を指定するものです。
@@ -717,13 +711,13 @@ AMA と DCR を使用して収集できるデータの種類と、指定でき�
 
 
 AMA と DCR を使用してログ収集を行う場合、収集するデータ ソースの種類に関わらず、以下の前提条件を満たしているかご確認ください。
+
 - OS がサポートされているか
-[Azure Monitor エージェントでサポートされるオペレーティング システム - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-supported-operating-systems)
-
 - ネットワーク要件を満たしているか
-[Azure Monitor エージェントのネットワーク構成 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-network-configuration?tabs=PowerShellWindows)
-
 - 十分なディスク領域が確保されているか
+
+[Azure Monitor エージェントのネットワーク構成 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-network-configuration?tabs=PowerShellWindows)
+[Azure Monitor エージェントでサポートされるオペレーティング システム - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-supported-operating-systems)
 [Azure Monitor エージェントの要件 | ディスク領域 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-requirements#disk-spaces)
 
 
@@ -774,14 +768,10 @@ Azure Monitor エージェントの自動アップグレードを有効化する
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
-
 ### 5.1.4 コンテナーからのログ収集
 本文を入力
 
 <br><!-- 小項目の終わり <br> を追加する -->
-
-
 
 
 ### 5.1.5 アプリケーションからのログ収集
@@ -827,10 +817,9 @@ Web アプリや API が
 #### 手動インストルメンテーション
 アプリケーションのソース コードに Application Insights SDK (クラシックまたは  Azure Monitor OpenTelemetry Distro) をインストールして、Application Insights を有効にします。ソース コードの変更は必要ですが、自動インストルメンテーションより多くの情報を取得でき、カスタム テレメトリの収集も可能です。
 
-利用方法はアプリケーションの開発言語ごとに異なるため、詳細は以下の弊社公開情報をご参照ください。
+利用方法はアプリケーションの開発言語ごとに異なるため、詳細は以下の公開情報をご参照ください。
 [Application Insights で OpenTelemetry を有効にする - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/app/opentelemetry-enable?tabs=net)
 [Application Insights を使用して .NET アプリケーションと Node.js アプリケーションを監視する (クラシック API) - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/app/classic-api?tabs=dotnet)
-
 
 
 また、Application Insights の可用性テストを使って、アプリケーションの死活監視も可能です。
@@ -841,20 +830,17 @@ Web アプリや API が
 ![](./StartUpGuide/5-1-4_webtest.png)
 
 
-詳細な利用方法は、以下弊社公開情報にてご案内しております。
+詳細な利用方法は、以下の公開情報にてご案内しております。
 [Application Insights 可用性テスト - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/app/availability?tabs=standard)
 
 
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 5.1.6 ストレージへの収集
 本文を入力
 
 <br><!-- 小項目の終わり <br> を追加する -->
-
-
 
 
 ### 5.1.7 診断設定
@@ -894,7 +880,6 @@ Web アプリや API が
 
 <br>
 
-
 #### 診断設定の作成方法 (リソース ログ, プラットフォーム メトリック)
 診断設定は Azure ポータル 上、Azure PowerShell や Azure CLI のコマンド、ARM テンプレートなどを用いて作成することが可能です。Azure ポータル 上での作成方法としては、大きく Azure リソースのページから行う方法と、[モニター] のページから行う方法があります。ここでは、Azure ポータル > 対象の Azure リソース > [監視] > [診断設定] からの作成方法をご紹介します。
 
@@ -917,18 +902,15 @@ Log Analytics ワークスペースに収集した場合は以下のように確
 ![](./StartUpGuide/5-1-6_AzureDiagnosticsTable.png)
 
 
-
 リソース ログは Log Analytics ワークスペースの AzureDiagnostics テーブルに収集されます。
 ただし、一部のリソース種では設定によりリソース固有のテーブルに収集することも可能です。詳細は以下を参照ください。
 [Azure Monitor のリソース ログ - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/platform/resource-logs?tabs=log-analytics#collection-mode)
 [Azure リソース ログでサポートされているサービスとスキーマ - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/platform/resource-logs-schema)
 
-
 ※ EventHub のリソース固有テーブルへクエリしたときの例
 ![](./StartUpGuide/5-1-6_ResourceSpecificTable.png)
 
 <br>
-
 
 #### 診断設定の作成方法 (アクティビティ ログ)
 アクティビティ ログ用の診断設定はサブスクリプションのスコープでのみ作成が可能です。
@@ -953,7 +935,6 @@ Log Analytics ワークスペースに収集した場合は以下のように確
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 5.1.8 データ エクスポート
 #### データ エクスポートとは
 Log Analytics ワークスペースのデータ エクスポート機能を使用することで、Log Analytics ワークスペースのテーブルに格納されるログを他の宛先 (ストレージ アカウントまたは Event Hubs) にエクスポートすることが可能です。データ エクスポート ルールを作成し、その中で対象となるテーブルと宛先を指定します。
@@ -976,7 +957,6 @@ GRS、GZRS など、ストレージ アカウントの冗長オプションを�
 
 ストレージ アカウント上にエクスポートされたJSON ファイル内のデータは、KQL の [externaldata operator](https://learn.microsoft.com/en-us/kusto/query/externaldata-operator?view=microsoft-fabric)を使用することでクエリすることが可能です。詳細は、[5.2.7 ストレージ アカウントに収集したデータの可視化](#5-2-7-ストレージ-アカウントに収集したデータの可視化)をご参照ください。
 
-
 <br>
 
 #### データ エクスポート機能の主な利用シナリオ - Event Hubs
@@ -995,7 +975,6 @@ Azure サービスおよびその他のツールとの統合: Event Hubs にエ�
 
 
 <br><!-- 小項目の終わり <br> を追加する -->
-
 
 
 ### 5.1.9 ネットワークの監視
@@ -1023,7 +1002,6 @@ Japan Azure Networking サポート チームのブログは下記リンクよ�
 
 <!-- 中項目 -->
 ## 5.2 分析とレポート
-
 ### 5.2.1 Log Analytics ワークスペースのクエリ  
 各種の Azure リソースやマシンから Log Analytics ワークスペースに収集したデータはクエリを実行して確認します。
 
@@ -1048,7 +1026,6 @@ KQL モードではより詳細なクエリを指定して実行することで�
 
 <br>
 
-
 #### アクセス制御モード
 Log Analytics ワークスペースのアクセス制御モードには 2 種類あります。
 ワークスペース コンテキスト アクセス制御モードでは Log Analytics ワークスペースの [ログ] からアクセスすることで、複数のリソースから Log Analytics ワークスペースに収集された全てのログを参照します。
@@ -1065,16 +1042,12 @@ Log Analytics ワークスペースのアクセス制御モードには 2 種類
 [Log Analytics ワークスペースのアクセス制御モードの違いについて | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/AccessControlMode/)
 
 
-**参考**
-Log Analytics ワークスペース内の各テーブルの詳細情報のリンク一覧:
+Log Analytics ワークスペース内の各テーブルや、各テーブルのサンプル クエリは、以下の公開情報をご参照ください。
 [Azure Monitor Resource log / log analytics tables - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/tables-index)
-
-各テーブルのサンプル クエリが記載されているページへのリンク一覧:
 [Azure Monitor log analytics queries by tables - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/queries-by-table)
 
 
 <br><!-- 小項目の終わり <br> を追加する -->
-
 
 
 ### 5.2.2 ログ アラート ルール
@@ -1108,7 +1081,6 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 5.2.3 メトリック アラート ルール
 メトリック アラート ルールは、Azure リソースのパフォーマンスや状態を示すメトリックを監視する機能です。
 既定で収集されるプラットフォーム メトリックや、既定では収集されない[カスタム メトリック](https://learn.microsoft.com/ja-jp/azure/azure-monitor/metrics/metrics-custom-overview)を監視することが可能です。
@@ -1136,7 +1108,6 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 [Azure Monitor のアラートに関するよくあるご質問 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/AzureMonitorEssential/MonitorAlertFAQ/#%E3%83%A1%E3%83%88%E3%83%AA%E3%83%83%E3%82%AF-%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88-%E3%83%AB%E3%83%BC%E3%83%AB)
 
 <br><!-- 小項目の終わり <br> を追加する -->
-
 
 
 ### 5.2.4 アクティビティ ログ アラート
@@ -1169,9 +1140,7 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 5.2.5 サービス正常性アラートとリソース正常性アラート
-
 #### サービス正常性アラート
 サービス正常性アラートは、お客様環境にてご利用いただいている Azure サービスおよびリージョンを監視対象とし、Azure サービス自体の正常性を監視する機能です。Azure サービスの障害や計画メンテナンス、サービスの廃止などのイベントが発生した際に、メールや SMS 等の方法で通知することが可能です。
 ![](./StartUpGuide/5-2-5_servicehealth_portal.png)
@@ -1236,7 +1205,6 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 [Resource Health アラートを作成する方法 - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/resource-health-alert-arm-template-guide)
 
 <br><!-- 小項目の終わり <br> を追加する -->
-
 
 
 ### 5.2.6 Log Analytics ワークスペースのコスト分析
@@ -1315,8 +1283,6 @@ Perf
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
-
 ### 5.2.7 ストレージ アカウントに収集したデータの可視化
 [5.1.6 診断設定](#5-1-6-診断設定)や [5.1.8 データ エクスポート](#5-1-8-データ-エクスポート)にて、ストレージ アカウントに出力したログ ファイルに対してもクエリを実行することが可能です。本記事では次の 2 つのアプローチを紹介します。
 
@@ -1327,7 +1293,6 @@ Perf
 なお、頻繁にデータにクエリしたり、アラートを発報する必要がある場合は、診断設定ではストレージ アカウントではなく Log Analytics ワークスペースへ収集することをご検討ください。
 
 <br>
-
 
 #### Azure Data Explorer を使う方法 <a id="azure-data-explorer"></a>
 Azure Data Explorer の概要については、以下の公開情報をご参照ください。
@@ -1403,7 +1368,6 @@ Log Analytics ワークスペースの [ログ] から `externaldata` 演算子
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 5.2.8 Application Insights のクエリ
 Application Insights に記録されたログは、Application Insights が Log Analytics ワークスペースと統合されているため、Application Insights と Log Analytics ワークスペースの両方から参照できます。
 
@@ -1413,7 +1377,7 @@ UI の構成や機能は同じであるため、クエリの実行方法につ�
 
 **1. Application Insights と Log Analytics ワークスペースで同じデータを参照する場合のテーブルとカラムが異なります。**
 
-Application Insights と Log Analytics ワークスペースのテーブルとカラムの対応は以下の弊社公開情報でご案内しております。
+Application Insights と Log Analytics ワークスペースのテーブルとカラムの対応は以下の公開情報でご案内しております。
 [Application Insights のクラシック リソースをワークスペースベースのリソースに移行する - Azure Monitor - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/previous-versions/azure/azure-monitor/app/convert-classic-resource#workspace-based-resource-changes)
 
 テーブルは [テーブル構造] にてご案内しており、Application Insights では [レガシ テーブル名] が利用されています。Log Analytics ワークスペースでは、[新しいテーブル名] が利用されています。カラムは [テーブル スキーマ] にてご案内しております。
@@ -1521,7 +1485,6 @@ Azure ブックには [Azure Portal] - [モニター] - [ブック] よりアク
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 5.3.2 ダッシュボード
 Log Analytics ワークスペース内のログに対して実行したクエリをグラフ等に可視化し、ダッシュボードにピン留めすることで、Log Analytics ワークスペースに保存されたデータをリアルタイムで確認できます。
 
@@ -1579,7 +1542,6 @@ AzureMetrics
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
-
 ### 5.3.3 メトリック エクスプローラー
 メトリック エクスプローラーではメトリックを時系列のグラフとして可視化します。
 各 Azure リソース (例: Azure VM) の画面左側メニューの [監視] > [メトリック] からメトリック エクスプローラーにアクセスします。
@@ -1601,7 +1563,6 @@ AzureMetrics
 
 
 <br><!-- 小項目の終わり <br> を追加する -->
-
 
 
 ### 5.3.4 Application Insights の可視化
@@ -1628,7 +1589,7 @@ Application Insights に収集されたデータは、クエリを利用しな�
 また、[使用状況] タブ内の各メニューではアプリケーションの利用状況 (ユーザー、セッションなど) を分析できます。
 ![](./StartUpGuide/5-3-4_1_usage_analysis.png)
 
-詳細は以下の弊社公開情報をご参照ください。
+詳細は以下の公開情報をご参照ください。
 [Application Insights による利用状況分析 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/app/usage?tabs=users)
 
 
@@ -1637,20 +1598,17 @@ Application Insights に収集されたデータは、クエリを利用しな�
 
 
 
-
 <!-- 大項目 -->
 ## 6. セキュリティ
-本文を入力
+本項目の説明
 
 <br>
 
 
-
 ## 6.1 データ保護
-本文
+本文を入力
 
 <br><!-- 中項目の終わり <br> を追加する -->
-
 
 
 ## 6.2 データ削除
@@ -1673,7 +1631,6 @@ GDPR（EU 一般データ保護規則）の要件に準拠する必要がある�
 
 
 <br><!-- 中項目の終わり <br> を追加する -->
-
 
 
 ## 6.3 Azure Monitor Private Link Scope (AMPLS)
