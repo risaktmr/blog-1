@@ -1403,7 +1403,7 @@ Usage
 *   `_IsBillable`：そのレコードが課金対象かどうか （true / false）
 *   `_BilledSize`：そのレコードのサイズ（Bytes）
 
-以下は Event テーブルの Event ID ごと課金対象データ量（MB）を日別に集計する例です。
+以下は Event テーブルの Event ID ごとの課金対象データ量（MB）を日別に集計する例です。
 ~~~
 Event 
 | where TimeGenerated > startofday(ago(31d)) and TimeGenerated < startofday(now()) 
@@ -1411,7 +1411,7 @@ Event
 | summarize count(), BillableDataMB =sum(_BilledSize) / 1000 / 1000 by EventID, bin(TimeGenerated, 1d)
 ~~~
 
-以下は Perf テーブルの過去 30 日間のパフォーマンス オブジェクトごと課金対象データ量（MB）を集計する例です。
+以下は Perf テーブルの過去 30 日間のパフォーマンス オブジェクトごとの課金対象データ量（MB）を集計する例です。
 ~~~
 Perf
 | where TimeGenerated > startofday(ago(31d)) and TimeGenerated < startofday(now()) 
