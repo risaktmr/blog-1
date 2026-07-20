@@ -265,7 +265,7 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 <br>
  
 #### Log Analytics エージェント (OMS Agent, Microsoft Monitoring Agent/MMA)
-2024 年 8 月 31 日に廃止されました。Log Analytics エージェント (OMS/MMA) は、仮想マシンやオンプレミス サーバーからログやパフォーマンス データを収集するために使用されていたレガシーエージェントです。
+2024 年 8 月 31 日に廃止されました。Log Analytics エージェント (OMS/MMA) は、仮想マシンやオンプレミス サーバーからログやパフォーマンス データを収集するために使用されていたレガシー エージェントです。
 2026 年 3 月 2 日以降、順次データの収集が停止するため、後継の Azure Monitor エージェントへ移行が必要です。
 
 [Log Analytics エージェントから Azure Monitor エージェントへの移行 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-migration)
@@ -305,7 +305,7 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 | リタイア予定日 | 対象機能 | 主な対応 |
 |------|---|---|
-| 2026 年 7 月 31 日 | Azure Monitor エージェントから Event Hubs／ストレージへ仮想マシンのクライアントデータを直接送信する機能（プレビュー） | Log Analytics のデータエクスポートなど、代替の送信方法へ切り替え |
+| 2026 年 7 月 31 日 | Azure Monitor エージェントから Event Hubs／ストレージへ仮想マシンのクライアント データを直接送信する機能（プレビュー） | Log Analytics のデータ エクスポートなど、代替の送信方法へ切り替え |
 | 2026 年 9 月 14 日 | HTTP Data Collector API | DCR ベースのログ インジェスト API へ移行 |
 | 2026 年 9 月 15 日 | Azure Activity Log のレガシ転送方式 | Azure Monitor の診断設定へ移行 |
 | 2026 年 9 月 30 日 | Container Insights の ContainerLog テーブル | ContainerLogV2 テーブルへ移行し、クエリやアラート ルールを更新 |
@@ -486,7 +486,7 @@ Azure VM の死活監視の詳細については、以下のブログをご参�
 ### 4.2 仮想マシン ホストのパフォーマンス監視
 前項 [4.1 仮想マシンの死活監視](#4-1-仮想マシンの死活監視) で紹介した Azure 基盤側のメトリック情報を利用して、Azure VM のパフォーマンス監視を行うことができます。
 
-※ Azure VM の CPU と メモリの使用率を表示した例
+※ Azure VM の CPU とメモリの使用率を表示した例
 ![](./StartUpGuide/4-2_HeartbeatMetric.png)
 
 Azure 基盤側で収集されるメトリックはプラットフォーム メトリックと呼ばれます。
@@ -721,9 +721,9 @@ Azure で扱われるメトリックには以下の 3 種類があります。
 <br>
 
 **■ サービス正常性**
-サービス正常性では ご利用の Azure サービスの障害や計画メンテナンス、サービスの廃止などのイベントについて表示します。
+サービス正常性ではご利用の Azure サービスの障害や計画メンテナンス、サービスの廃止などのイベントについて表示します。
 [監視/モニター] > [サービス正常性] > [有効なイベント] もしくは [履歴] をクリックして確認します。
-[有効なイベント] には現時点でアクティブなサービス正常性が表示され、[履歴] には過去 のサービス正常性イベントが表示されます。
+[有効なイベント] には現時点でアクティブなサービス正常性が表示され、[履歴] には過去のサービス正常性イベントが表示されます。
 ![](./StartUpGuide/5-1-7_activitylog2.png)
 
 ![](./StartUpGuide/5-1-7_activitylog3.png)
@@ -962,7 +962,7 @@ Web アプリや API が
 <br>
 
 **■ 手動インストルメンテーション**
-アプリケーションのソース コードに Application Insights SDK (クラシックまたは  Azure Monitor OpenTelemetry Distro) をインストールして、Application Insights を有効にします。ソース コードの変更は必要ですが、自動インストルメンテーションより多くの情報を取得でき、カスタム テレメトリの収集も可能です。
+アプリケーションのソース コードに Application Insights SDK (クラシックまたは Azure Monitor OpenTelemetry Distro) をインストールして、Application Insights を有効にします。ソース コードの変更は必要ですが、自動インストルメンテーションより多くの情報を取得でき、カスタム テレメトリの収集も可能です。
 
 利用方法はアプリケーションの開発言語ごとに異なるため、詳細は以下の公開情報をご参照ください。
 [Application Insights で OpenTelemetry を有効にする - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/app/opentelemetry-enable?tabs=net)
@@ -1155,7 +1155,7 @@ Network Watcher の機能の一つであるネットワークの分析情報は�
 
 **■ クエリのモード**
 クエリを実行する 2 種類のモードがあります。
-簡易モードでは [ログ] > [テーブル] > [対象テーブルの 実行] をクリックすることで、簡単にクエリを実行可能です。
+簡易モードでは [ログ] > [テーブル] > [対象テーブルの実行] をクリックすることで、簡単にクエリを実行可能です。
 ![](./StartUpGuide/5-2-1_loganalyticsworkspace_query1.png)
 
 
@@ -1182,7 +1182,7 @@ Log Analytics ワークスペースのアクセス制御モードには 2 種類
 ![](./StartUpGuide/5-2-1_loganalyticsworkspace_query4.png)
 
 
-リソース コンテキスト アクセス制御モードでは 各 Azure リソース (例: Azure VM) の画面左側メニューの [監視] > [ログ] からアクセスすることで、対象のリソースから Log Analytics ワークスペースに収集されたログのみを参照します。
+リソース コンテキスト アクセス制御モードでは各 Azure リソース (例: Azure VM) の画面左側メニューの [監視] > [ログ] からアクセスすることで、対象のリソースから Log Analytics ワークスペースに収集されたログのみを参照します。
 
 ※ リソース コンテキスト アクセス制御モードの場合の例
 ![](./StartUpGuide/5-2-1_loganalyticsworkspace_query5.png)
@@ -1403,7 +1403,7 @@ Usage
 *   `_IsBillable`：そのレコードが課金対象かどうか （true / false）
 *   `_BilledSize`：そのレコードのサイズ（Bytes）
 
-以下は Event テーブルの Event ID ごと 課金対象データ量（MB）を日別に集計する例です。
+以下は Event テーブルの Event ID ごと課金対象データ量（MB）を日別に集計する例です。
 ~~~
 Event 
 | where TimeGenerated > startofday(ago(31d)) and TimeGenerated < startofday(now()) 
@@ -1411,7 +1411,7 @@ Event
 | summarize count(), BillableDataMB =sum(_BilledSize) / 1000 / 1000 by EventID, bin(TimeGenerated, 1d)
 ~~~
 
-以下は Perf テーブルの 過去 30 日間のパフォーマンス オブジェクトごと 課金対象データ量（MB）を集計する例です。
+以下は Perf テーブルの過去 30 日間のパフォーマンス オブジェクトごと課金対象データ量（MB）を集計する例です。
 ~~~
 Perf
 | where TimeGenerated > startofday(ago(31d)) and TimeGenerated < startofday(now()) 
@@ -1618,9 +1618,9 @@ Azure ブックには Azure ポータル > [モニター] > [ブック] より�
 パラメーターにより表示時間を切り替えるブックの作成方法について以下にご紹介します。
 ⅰ. パラメーターを追加します。
 ![](./StartUpGuide/5-3-1_workbook_add_parameter.png)
-ⅱ. パラメーターの型を 「時間の範囲の選択」を選びます。
+ⅱ. パラメーターの型を「時間の範囲の選択」を選びます。
 ![](./StartUpGuide/5-3-1_workbook_parameter_type.png)
-ⅲ. つづいて ブック にクエリを追加し、[時間範囲] で先に作成したパラメーター名を指定します。
+ⅲ. つづいてブックにクエリを追加し、[時間範囲] で先に作成したパラメーター名を指定します。
 ![](./StartUpGuide/5-3-1_workbook_parameter_name.png)
 ⅳ. 編集完了後、パラメーターの値を変更すると自動でグラフが変化します。
 ![](./StartUpGuide/5-3-1_workbook_graph.png)
@@ -1684,7 +1684,7 @@ Azure ワークブックの詳細は、本記事 [5.3.1 ワークブック](#5-3
     ![](./StartUpGuide/5-3-2_dashboard6.png)
 
 
-*   ダッシュボードは Azure ポータル上の ポータル メニュー (画面左上の三本線アイコン) > [ダッシュボード] からアクセスできます。
+*   ダッシュボードは Azure ポータル上のポータル メニュー (画面左上の三本線アイコン) > [ダッシュボード] からアクセスできます。
     ![](./StartUpGuide/5-3-2_dashboard7.png)
 
     ![](./StartUpGuide/5-3-2_dashboard8.png)
@@ -1697,7 +1697,7 @@ Azure ワークブックの詳細は、本記事 [5.3.1 ワークブック](#5-3
 #### 5.3.3 メトリック エクスプローラー
 メトリック エクスプローラーではメトリックを時系列のグラフとして可視化します。
 各 Azure リソースの画面左側メニューの [監視] > [メトリック] からメトリック エクスプローラーにアクセスします。
-以下は Azure VM のプラットフォーム メトリック (ホスト メトリック) と ゲスト メトリックの表示の例です。
+以下は Azure VM のプラットフォーム メトリック (ホスト メトリック) とゲスト メトリックの表示の例です。
 
 **■ プラットフォーム メトリック**
 プラットフォーム メトリックは Azure VM を作成すると自動的に収集が開始され、[メトリック名前空間] を “仮想マシンホスト” に設定すると確認できます。
@@ -1705,7 +1705,7 @@ Azure ワークブックの詳細は、本記事 [5.3.1 ワークブック](#5-3
 
 
 **■ ゲスト メトリック**
-ゲスト メトリックは ゲスト OS にインストールした Azure Monitor エージェントにより収集され、[メトリック名前空間] を “仮想マシンのゲスト” に設定すると確認できます。
+ゲスト メトリックはゲスト OS にインストールした Azure Monitor エージェントにより収集され、[メトリック名前空間] を “仮想マシンのゲスト” に設定すると確認できます。
 ![](./StartUpGuide/5-3-3_metricexplorer2.png)
 
 
@@ -1788,7 +1788,7 @@ REST API の実行手順や前提条件は、以下の公開情報やブログ�
 
 ### 6.3 Azure Monitor Private Link Scope (AMPLS)
 **1. AMPLS の概要**
-AMPLS（Azure Monitor Private Link）を構成することで、 Azure Monitor（Log Analytics や Application Insights など）への通信をパブリック インターネットを経由せず、プライベート ネットワーク経由で行うことが可能になります。
+AMPLS（Azure Monitor Private Link）を構成することで、Azure Monitor（Log Analytics や Application Insights など）への通信をパブリック インターネットを経由せず、プライベート ネットワーク経由で行うことが可能になります。
 
 仮想ネットワーク (VNet) にプライベート エンドポイント (PE) を作成して AMPLS に接続し、AMPLS に関連付けた Log Analytics / Application Insights などに対するインジェスト（送信） および クエリ（参照）の通信を、インターネットを経由せず Private Link 経由にする構成です。基本的には VNet ごとに 1 つの PE を作成し構成します。
 ![](./StartUpGuide/6-3_basic-concepts.png)
@@ -1829,11 +1829,11 @@ AMPLS のプライベート DNS ゾーンの詳細については、以下の公
 
 <br>
 
-**■ AMPLS の サブネットサイズ / 必要 IP アドレス数について**
+**■ AMPLS のサブネット サイズ / 必要 IP アドレス数について**
 Azure Monitor Private Link の構成では、サポートされる最小の IPv4 サブネットは /27 です。
 Azure Monitor プライベート リンク エンドポイントの一覧については、エンドポイントの DNS 設定を確認してください。
 また、より詳しい IP 消費の考え方（目安・計算方法の例）は、以下のブログをご参照ください。
-[Azure Monitorのプライベート リンクを構成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/fundamentals/private-link-configure?tabs=portal#review-endpoints-dns-settings)
+[Azure Monitor のプライベート リンクを構成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/fundamentals/private-link-configure?tabs=portal#review-endpoints-dns-settings)
 [AMPLS で必要な IP アドレスの個数について | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/AMPLS/ampls-ip-ranges/)
 
 <br>
