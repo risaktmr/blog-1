@@ -780,7 +780,7 @@ AMA と DCR を使用して収集できるデータの種類と、指定でき�
 | IIS ログ | インターネット インフォメーション サービス (IIS) によりローカル ディスク上のファイルに出力される情報 | Windows | Log Analytics ワークスペース (W3CIISLog テーブル) |
 
 Log Analytics ワークスペースに収集されたログはワークスペース内の特定のテーブル内に格納されます。
-テーブルについては以下をご参照ください。
+テーブルについては以下の公開情報をご参照ください。
 [Log Analytics ワークスペースの概要 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/log-analytics-workspace-overview#log-tables)
 
 <br>
@@ -801,13 +801,13 @@ AMA と DCR を使用してログ収集を行う場合、収集するデータ �
 それぞれの作業は、Azure ポータル、コマンドライン (Azure CLI, Azure PowerShell)、ARM テンプレート等を使用して実施できます。
 ここでは、Azure ポータルを使用した方法について具体的にご紹介します。
 
-Azure ポータルでの DCR の作成方法や、DCR と VM を関連付ける方法は以下をご参照ください。
+Azure ポータルでの DCR の作成方法や、DCR と VM を関連付ける方法は以下の公開情報をご参照ください。
 なお、Azure ポータルで DCR を関連付けた場合、(VM に AMA が未インストールの場合は) AMA のインストールも自動で実施されます。
 [Azure Monitor を使用して仮想マシンからログ データを収集する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/vm/data-collection?tabs=default#create-a-data-collection-rule)
 [Azure Monitor でデータ収集ルールの関連付けを管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/data-collection/data-collection-rule-associations?tabs=cli#view-and-modify-associations-for-a-dcr-in-the-azure-portal)
 
 
-Azure ポータル以外の方法で DCR を作成する方法、および DCR と VM を関連付ける方法については以下をご参照ください。
+Azure ポータル以外の方法で DCR を作成する方法、および DCR と VM を関連付ける方法については以下の公開情報をご参照ください。
 [Azure Monitor でデータ収集ルール (DCR) を作成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/data-collection/data-collection-rule-create-edit?tabs=cli#create-or-edit-a-dcr-using-json)
 [Azure Monitor でデータ収集ルールの関連付けを管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/data-collection/data-collection-rule-associations?tabs=cli#create-new-association)
 
@@ -1049,7 +1049,7 @@ Log Analytics ワークスペースに収集した場合は以下のように確
 ![](./StartUpGuide/5-1-6_ResourceSpecificTable.png)
 
 
-リソース ログのテーブルの詳細は以下をご参照ください。
+リソース ログのテーブルの詳細は以下の公開情報をご参照ください。
 [Azure Monitor のリソース ログ - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/platform/resource-logs?tabs=log-analytics#collection-mode)
 [Azure リソース ログでサポートされているサービスとスキーマ - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/platform/resource-logs-schema)
 
@@ -1072,7 +1072,7 @@ Log Analytics ワークスペースに収集した場合は以下のように確
 ![](./StartUpGuide/5-1-6_ActivityLogsExportedtoStorageaccount.png)
 
 
-アクティビティ ログ用の診断設定の詳細については以下をご参照ください。
+アクティビティ ログ用の診断設定の詳細については以下の公開情報をご参照ください。
 [Azure Monitor のアクティビティ ログ | アクティビティ ログのエクスポート - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/platform/activity-log?tabs=portal-1%2Clog-analytics%2Cportal-2#export-activity-log)
 
 <br><!-- 小項目の終わり <br> を追加する -->
@@ -1115,7 +1115,7 @@ Azure サービスおよびその他のツールとの統合: Event Hubs にエ�
 <br>
 
 **■ データ エクスポート機能の利用開始方法**
-データ エクスポート ルールの必要な権限や制限、作成手順の詳細については以下をご参照ください。
+データ エクスポート ルールの必要な権限や制限、作成手順の詳細については以下の公開情報をご参照ください。
 [Azure Monitor の Log Analytics データ エクスポート - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/logs-data-export?tabs=portal-1%2Cportal-2#limitations)
 
 
