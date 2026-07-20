@@ -245,8 +245,16 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 
 ## 2.1 リタイア済み製品
-本項では、Azure Monitor で以前提供されていた機能やソリューションのうち 2026 年 4 月 1 日時点で廃止済みまたは非推奨となっているものを記載します。後継機能への移行や対応方法に関する情報をあわせてご紹介しますので、もし該当する製品を現在もご利用の場合にはご参照ください。
-  
+本項では、Azure Monitor で以前提供されていた機能やソリューションのうち 2026 年 7 月 1 日時点で廃止済みまたは非推奨となっているものを記載します。後継機能への移行や対応方法に関する情報をあわせてご紹介しますので、もし該当する製品を現在もご利用の場合にはご参照ください。なお、本情報は、公開情報を基に Azure Monitor に関連する主なリタイア済み製品を整理したものであり、すべての製品を網羅していることを保証するものではありません。
+
+| リタイア日 | 対象機能 | 主な対応 |
+|---|---|---|
+| 2024 年 2 月 29 日 | Application Insights クラシック版 | ワークスペース版 Application Insights へ移行 |
+| 2024 年 8 月 31 日 | Log Analytics エージェント (OMS Agent/MMA) | Azure Monitor エージェントへ移行 |
+| 2024 年 8 月 31 日 | コンテナー監視ソリューション | Container Insights へ移行 |
+| 2026 年 3 月 31 日 | Azure Diagnostics 拡張機能 (WAD/LAD) | Azure Monitor エージェントへ移行 |
+| 2026 年 3 月 31 日 | Log Analytics beta API | Log Analytics クエリ API v1 へ移行 |
+
 <br>
   
 #### Application Insights のクラシック版
@@ -293,22 +301,21 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 
 ## 2.2 リタイア予定の製品
-本項では、Azure Monitor で以前提供されていた機能やソリューションのうち 2026 年 4 月 1 日時点で今後廃止予定のものを記載しています。
+本項では、Azure Monitor で以前提供されていた機能やソリューションのうち 2026 年 7 月 1 日時点で今後廃止予定のものを記載しています。本情報は、公開情報を基に Azure Monitor に関連する主なリタイア予定を整理したものであり、すべての変更を網羅していることを保証するものではありません。また、リタイア日や影響範囲は変更される場合があります。  
+ご利用の環境がリタイアの影響を受ける場合、原則として[サービス正常性](https://learn.microsoft.com/ja-jp/azure/service-health/overview)を通じて対象サブスクリプションへ通知される予定です。実際の影響、対応期限、および必要な作業については、Azure ポータルの **［サービス正常性］>［正常性に関する勧告］** に表示される通知を必ずご確認ください。
 
-<br>
-
-#### Data Collector API
-2026 年 9 月 14 日に廃止予定です。Data Collector API は、Log Analytics ワークスペースにカスタム ログ データを HTTP 経由で送信するためのレガシー API です。後継のログ インジェスト API では、データ収集ルール (DCR) による取り込み時の変換やフィルタリング、RBAC によるきめ細かなアクセス制御が可能になります。廃止後は Data Collector API でログを送信することができなくなるため、ログ インジェスト API を呼び出すようにスクリプトやアプリケーションの改修が必要です。
-
-[HTTP データ コレクター API からログ インジェスト API に移行する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/custom-logs-migrate)
-[Retirement notice ： Transition to DCR-based custom log ingestion by 14 September 2026 について | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/HowToMigrateToLogIngestionAPI/)
-
-<br>
-
-#### ContainerLog スキーマ
-2026 年 9 月 30 日に廃止予定です。ContainerLog テーブルは、Container Insights で使用されてきた旧ログ スキーマです。後継の ContainerLogV2 テーブルでは、ログ エントリの構造化 (LogLevel や ContainerName 等のカラム追加) や複数行のログ取り込みがサポートされています。ContainerLogV2 は、ConfigMap やデータ収集ルール (DCR) で有効化することが可能です。また、既存のクエリやアラートルールで ContainerLog テーブルを参照している場合は、ContainerLogV2 に合わせた書き換えも必要になります。
-
-[Container Insights の ContainerLogV2 スキーマを構成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insights-logs-schema)
+| リタイア予定日 | 対象機能 | 主な対応 |
+|------|---|---|
+| 2026 年 7 月 31 日 | Azure Monitor エージェントから Event Hubs／ストレージへ仮想マシンのクライアントデータを直接送信する機能（プレビュー） | Log Analytics のデータエクスポートなど、代替の送信方法へ切り替え |
+| 2026 年 9 月 14 日 | HTTP Data Collector API | DCR ベースのログ インジェスト API へ移行 |
+| 2026 年 9 月 15 日 | Azure Activity Log のレガシ転送方式 | Azure Monitor の診断設定へ移行 |
+| 2026 年 9 月 30 日 | Container Insights の ContainerLog テーブル | ContainerLogV2 テーブルへ移行し、クエリやアラートルールを更新 |
+| 2026 年 9 月 30 日 | Container Insights のレガシ認証 | マネージド ID 認証へ移行 |
+| 2026 年 9 月 30 日 | Application Insights API キー | Microsoft Entra ID 認証へ移行 |
+| 2026 年 9 月 30 日 | Application Insights URL Ping テスト（クラシック テスト） | 標準テストへ移行 |
+| 2027 年 3 月 31 日 | Application Insights .NET Classic API SDK 2.x | Application Insights .NET SDK 3.x または Azure Monitor OpenTelemetry Distro へ移行 |
+| 2028 年 3 月 31 日 | Log Analytics batch API | バッチ要求を個別の Logs Query API 呼び出しへ変更 |
+| 2028 年 6 月 30 日 | VM Insights の Map 機能と Dependency Agent | インベントリや変更の追跡には Change Tracking とインベントリを検討し、依存関係の可視化については監視要件に応じた代替手段を検討 |
 
 <br>
 
@@ -320,9 +327,42 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 [Azure Monitor の Log Analytics ワークスペース データ エクスポート - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/logs-data-export?tabs=portal)
 
 <br>
- 
+
+#### HTTP Data Collector API
+2026 年 9 月 14 日にサポート終了予定です。Data Collector API は、Log Analytics ワークスペースにカスタム ログ データを HTTP 経由で送信するためのレガシー API です。後継のログ インジェスト API では、データ収集ルール (DCR) による取り込み時の変換やフィルタリング、RBAC によるきめ細かなアクセス制御が可能になります。サポート終了後も Data Collector API でログを送信できる予定ですが、ログの取り込みに関する処理能力や柔軟性および何か問題が発生した際のサポート有無を考慮し、ログ インジェスト API への移行を推奨しております。ログ インジェスト API を呼び出すようにスクリプトやアプリケーションの改修が必要です。
+
+[HTTP データ コレクター API からログ インジェスト API に移行する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/custom-logs-migrate)
+[Retirement notice ： Transition to DCR-based custom log ingestion by 14 September 2026 について | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/HowToMigrateToLogIngestionAPI/)
+
+<br>
+
+#### Azure Activity Log のレガシ転送方式
+2026 年 9 月 15 日に廃止予定です。Azure Activity Log を Log Analytics ワークスペース、Event Hubs、またはストレージアカウントへ転送するレガシ方式は廃止期日までに診断設定へ移行されます。
+
+[従来の収集方法 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/previous-versions/azure/azure-monitor/essentials/legacy-collection-methods?tabs=powershell)
+[Azure Activity Logs Legacy solution is replaced by Diagnostic settings](https://azure.microsoft.com/ja-jp/updates?id=azure-activity-logs-legacy-solution-is-replaced-by-diagnostic-settings)　
+
+<br>
+
+#### ContainerLog テーブル
+2026 年 9 月 30 日に廃止予定です。ContainerLog テーブルは、Container Insights で使用されてきた旧ログ スキーマです。後継の ContainerLogV2 テーブルでは、ログ エントリの構造化 (LogLevel や ContainerName 等のカラム追加) や複数行のログ取り込みがサポートされています。ContainerLogV2 は、ConfigMap やデータ収集ルール (DCR) で有効化することが可能です。また、既存のクエリやアラートルールで ContainerLog テーブルを参照している場合は、ContainerLogV2 に合わせた書き換えも必要になります。
+
+[Container Insights の ContainerLogV2 スキーマを構成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insights-logs-schema)
+
+<br>
+
+#### Container Insights のレガシ認証
+2026 年 9 月 30 日にサポート終了予定です。レガシ認証は、証明書と Log Analytics ワークスペース キーを使用して、監視エージェントから Azure Monitor へデータを送信する従来の認証方式です。現在は、より安全なマネージド ID 認証が既定の認証方式となっています。マネージド ID 認証では、クラスターのマネージド ID を使用して Azure Monitor へデータを送信するため、Log Analytics ワークスペース キーを管理する必要がありません。また、Syslog の収集や高スケール モードなど、マネージド ID 認証を前提とする新しい Container Insights の機能も利用できます。
+レガシ認証を使用しているクラスターは、廃止日までにマネージド ID 認証へ移行する必要があります。Azure Resource Graph を使用して対象となる AKS クラスターおよび Azure Arc 対応 Kubernetes クラスターを確認できます。移行は Azure portal の移行機能に加え、Azure CLI を使用して実施できます。
+
+[コンテナーの分析情報のレガシ認証 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insights-authentication?tabs=cli)
+
+<br>
+
 #### Application Insights API キー
-2026 年 9 月 30 日に廃止予定です。Application Insights API キーは、api.applicationinsights.io などで Application Insights のテレメトリ データをクエリする際に使用される API キーです。廃止後は API キーによるクエリができなくなるため、Microsoft Entra ID 認証への移行が必要です。
+2026 年 9 月 30 日に廃止予定です。
+※ Application Insights API キーは、api.applicationinsights.io などで Application Insights のテレメトリ データをクエリする際に使用される API キーです。廃止後は API キーによるクエリができなくなるため、Microsoft Entra ID 認証への移行が必要です。
+※ 当初案内されていた 2026 年 3 月 31 日から延長されています。
 
 [Microsoft Entra ID を使用した Application Insights の認証 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/app/azure-ad-authentication)
 [Application Insights API キーの廃止と移行について | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/applicationInsights/api-key-deprecate-and-migration/)
@@ -337,15 +377,35 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
   
 <br>
 
+#### Application Insights .NET Classic API SDK 2.x
+2027 年 3 月 31 日に廃止予定です。移行先は次のいずれかが挙げられます。
+*   Application Insights .NET SDK 3.x
+*   Azure Monitor OpenTelemetry Distro
+
+新規アプリケーションでは、Azure Monitor OpenTelemetry Distro が推奨されています。既存の `TelemetryClient` や `Track*` 呼び出しへの互換性が必要な場合は、SDK 3.x への移行も検討いただけます。
+
+[Application Insights を使用して .NET アプリケーションと Node.js アプリケーションを監視する (クラシック API 2.x) - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/previous-versions/azure/azure-monitor/app/classic-api?tabs=dotnet%2Cnet)
+[Application Insights クラシック API ソフトウェア開発キット (SDK) を Azure Monitor OpenTelemetry に移行する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/app/migrate-to-opentelemetry?tabs=dotnet)
+
+<br>
+
 #### Log Analytics batch API
-2028 年 3 月 31 日に廃止予定です。現在公開されている Log Analytics クエリ API（バージョン v1）に含まれる機能の一つで、複数のクエリをまとめて一回の API 呼び出しで送信します。廃止後は batch API が利用できなくなるため、複数回に分けて Log Analytics クエリ API などを実行する必要があります。
-  
+2028 年 3 月 31 日に廃止予定です。現在公開されている Log Analytics クエリ API（バージョン v1）に含まれる機能の一つで、複数のクエリをまとめて一回の API 呼び出しで送信します。
+
+廃止後は batch 操作を利用できなくなるため、バッチ要求の `requests` 配列に含まれている各クエリを分割し、Logs クエリ API の `query` 操作を個別に実行するよう、アプリケーションやスクリプトを変更する必要があります。Azure SDK のバッチ クエリ メソッドを使用している場合も、個別のクエリ メソッドへ変更する必要があります。  
+
 [バッチクエリとベータクエリを使用して標準の Log Analytics クエリ API に移行する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/api/migrate-batch-and-beta)
 
 <br>
 
 #### VM Insights の Map 機能と Dependency Agent
-2028 年 6 月 30 日に廃止予定です。VM Insights の Map 機能は、仮想マシン上で動作するプロセスや、TCP 接続によるサーバーや外部サービスへの依存関係をマップとして可視化する機能です。この機能では、Azure Monitor エージェントに加えて Dependency Agent も使用します。廃止後は、Azure ポータル の VM Insights の マップ機能や Dependency Agent によるデータ送信などが利用できなくなるため、Change Tracking とインベントリ機能への移行をご検討ください。
+2028 年 6 月 30 日に廃止予定です。VM Insights の Map 機能は、仮想マシン上で動作するプロセスや、TCP 接続によるサーバーや外部サービスへの依存関係をマップとして可視化する機能です。この機能では、Azure Monitor エージェントに加えて Dependency Agent も使用します。
+
+廃止後は、Azure portal の VM Insights の Map 機能、マップ データを利用するブック、Dependency Agent によるデータ送信、および Service Map API などが利用できなくなります。
+
+仮想マシン内のソフトウェア、Windows サービス、Linux デーモン、ファイル、Windows レジストリなどのインベントリや変更を把握する用途については、Azure Monitor エージェントを使用する Change Tracking とインベントリが一部の代替となる場合があります。
+
+ただし、Change Tracking とインベントリは、プロセス間の依存関係、TCP 接続、サーバーや外部サービスとの通信関係をマップとして可視化する機能を提供しないため、VM Insights の Map 機能を完全に置き換えるものではありません。これらの依存関係データを引き続き収集する必要がある場合は、現在の利用状況と監視要件を確認し、必要に応じて別の代替手段をご検討ください。
   
 [VM Insights Map と Dependency Agent の提供終了に関するガイダンス - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/vm/vminsights-maps-retirement)
 [Azure Monitor エージェントを使用した Azure Change Tracking とインベントリの概要 | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-change-tracking-inventory/overview-monitoring-agent)
@@ -387,7 +447,7 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 本項では Azure VM が期待どおり稼働しているかを確認し、VM の停止や OS からの応答を検知する死活監視について記載します。
 Azure Monitor における Azure VM の死活監視では、Azure 基盤側とゲスト OS 側の２つのレイヤーがあり、レイヤー毎に監視対象や方法が異なります。
 
-■ Azure 基盤側の監視
+**■ Azure 基盤側の監視**
 VM の可用性メトリックやリソース正常性の監視を死活監視に利用する方法です。
 VM の可用性メトリック (VM Availability Metric) は Azure 基盤側のメトリック情報であり、VM の利用状況を示します。
 メトリックの値が 1 の場合は VM が実行中で利用可能な状態です。VM のシャットダウンや再起動をおこなった場合は、値が 0 となります。
@@ -401,7 +461,7 @@ Azure 基盤側のメトリックは、可用性だけでなく CPU 使用率等
 
 <br>
 
-■ Azure VM の OS 側の監視
+**■ Azure VM の OS 側の監視**
 Azure VM のゲスト OS 内で動作するエージェントが収集する、Heartbeat ログや OS のメトリックを監視する方法です。
 Heartbeat ログの収集状況から、一定時間ログが届かない場合にはエージェントの停止やネットワークの異常等の問題が発生している可能性を検知することが可能です。
 
@@ -425,7 +485,7 @@ Azure VM の死活監視については詳細を以下のブログ記事でご�
 
 
 ### 4.2 仮想マシン ホストのパフォーマンス監視
-前項 4.1 で紹介した Azure 基盤側のメトリック情報を利用して、Azure VM のパフォーマンス監視をおこなうことができます。
+前項 [4.1 仮想マシンの死活監視](#4-1-仮想マシンの死活監視) で紹介した Azure 基盤側のメトリック情報を利用して、Azure VM のパフォーマンス監視をおこなうことができます。
 
 ※ Azure VM の CPU と メモリの使用率を表示した例
 ![](./StartUpGuide/4-2_HeartbeatMetric.png)
@@ -438,7 +498,7 @@ Azure VM でサポートされているプラットフォーム メトリック�
 [サポートされているメトリック - Microsoft.Compute/virtualMachines - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/supported-metrics/microsoft-compute-virtualmachines-metrics)
 
 プラットフォーム メトリックは Azure 基盤側から見える CPU、メモリ、ディスク I/O、ネットワークなどの監視に向いています。
-たとえば Windows OS 内の C ドライブの空き容量を監視したい、といった場合には、各ドライブの空き容量を示すメトリックがプラットフォーム メトリックとして提供されていないため、このシナリオではプラットフォーム メトリックを利用した監視は適しません。
+例えば Windows OS 内の C ドライブの空き容量を監視したい、といった場合には、各ドライブの空き容量を示すメトリックがプラットフォーム メトリックとして提供されていないため、このシナリオではプラットフォーム メトリックを利用した監視は適しません。
 
 サポートされていないメトリックやより詳細なゲスト OS の情報を監視したい場合には、ゲスト OS 内のエージェントが収集するゲスト メトリックやログを利用します。
 プラットフォーム メトリックは Azure ポータルの監視画面での確認や、本項 4.6 で紹介するアラート ルールを設定することで、特定の条件に一致した場合に利用者へ通知をおこなうこともできます。
@@ -469,7 +529,7 @@ Azure VM のプラットフォーム メトリックの場合と同様に、収�
 <br>
 
 例えば以下のようなシナリオではゲスト OS のパフォーマンス監視が有用です。
-Azure 基盤側から VM 全体の状態をプラット フォーム メトリックで確認し、さらに OS 内部の詳細な状態や追加で必要な情報をカスタム メトリックを利用する、というように監視要件に応じて使い分けたり組み合わせて利用します。
+Azure 基盤側から VM 全体の状態をプラットフォーム メトリックで確認し、さらに OS 内部の詳細な状態や追加で必要な情報をカスタム メトリックを利用する、というように監視要件に応じて使い分けたり組み合わせて利用します。
 
 | シナリオ | 利用するデータ例 |  |
 |------|------------------|--------|
@@ -493,7 +553,7 @@ Azure 基盤側から VM 全体の状態をプラット フォーム メトリ�
 
 AMA によりゲスト OS の各情報をログとして Log Analytics ワークスペースと呼ばれる Azure 上のデータ ストアに収集し、クエリ言語である KQL により検索します。また、ログ アラート ルールでクエリ検索結果を元にアラートを構成し、監視をおこなうことができます。ログ アラート ルールについては本記事 [5.2.2 ログ アラート ルール](#5-2-2-ログ-アラート-ルール)をご参照ください。
 
-ゲスト OS のログを収集することで、たとえば以下のようなシナリオに対応できます。
+ゲスト OS のログを収集することで、例えば以下のようなシナリオに対応できます。
 - Windows イベント ログに特定のイベント ID のログが出力された場合に通知する
 - Linux の Syslog に特定の Facility のログが出力された場合に通知する
 - アプリケーションが出力するテキスト ログに `ERROR` や `Failed` などの任意の文字列が出力された場合に通知する
@@ -502,25 +562,47 @@ AMA によりゲスト OS の各情報をログとして Log Analytics ワーク
 - パフォーマンス情報をログとして収集し複数の VM をまとめて監視する
 
 このように、ログ監視は KQL により条件を記載することで様々な要件に対応することができます。
-AMA により収集可能なログ種については、本記事 [5.1.2 仮想マシンからのログ収集](#5-1-2-仮想マシンからのログ収集)をご参照ください。
+AMA により収集可能なログ種については、本記事 [5.1.3 仮想マシンからのログ収集](#5-1-3-仮想マシンからのログ収集)をご参照ください。
 
 
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
 ### 4.5 OS 内のサービス監視
-本文を入力
+変更履歴とインベントリ機能を有効化することで、OS 内のサービス状態を監視することができます。
+
+※ Windows Update サービスが停止状態であることを示すログを抽出した例
+![](./StartUpGuide/4-5_ChangeTrackingInventory.png)
+
+
+変更履歴とインベントリ機能も、Azure Monitor エージェント (AMA) を利用して情報を Log Analytics ワークスペースに収集します。
+Windows サービスや Linux デーモンの状態、構成変更などをログとして確認できるため、ログ アラート ルールを利用することで、特定のサービスが停止状態となった場合に通知をおこなう等の構成が可能です。
+
+例えば、サービス監視では以下のようなシナリオに対応できます。
+
+- Azure VM 上の Web サーバーやデータベースなど、業務上重要なサービスが停止した場合に通知する
+- サービスのスタートアップの種類が自動から手動や無効に変更された場合に検知する
+- パッチ適用やアプリケーション更新後に、想定外のサービス停止や状態変更が発生していないか確認する
+- 複数の VM で同じサービスの状態を横断的に確認し停止している VM を特定する
+
+また、変更履歴とインベントリ機能はサービス監視だけでなく、OS 内の構成変更を確認する用途でも利用できます。
+例えば、インストール済みソフトウェアの追加や削除、ファイルの変更、Windows のレジストリ キーの変更などを追跡できます。
+これにより、監査やガバナンスの向上を目的として構成変更がないかを確認したり、意図しない変更を検知したりすることができます。障害対応においても、例えば事象発生時における構成変更の有無を確認することに利用できます。
+
+[Azure Monitor エージェントを使用した Azure Change Tracking とインベントリの概要 | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-change-tracking-inventory/overview-monitoring-agent)
+[ConfigurationData のログ テーブル クエリの例 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/queries/configurationdata)
+
 
 <br><!-- 小項目の終わり <br> を追加する -->
 
 
 ### 4.6 アラート ルールの設定
-Azure Monitor には、各種 Azureサービスやリソースを監視する機能があり、異常を検知した際にメールや SMS などの通知や自動アクションを実行できます。
+Azure Monitor には、各種 Azure サービスやリソースを監視する機能があり、異常を検知した際にメールや SMS などの通知や自動アクションを実行できます。
 
 <br>
 
 #### アラート ルール
-各種 Azureサービスやリソースを監視する機能の総称です。監視対象のデータ（メトリックやログ、アクティビティ ログなど）や監視条件を決め、異常を検知します。監視するデータの種類よってアラート ルールの種類が異なります。
+各種 Azure サービスやリソースを監視する機能の総称です。監視対象のデータ（メトリックやログ、アクティビティ ログなど）や監視条件を決め、異常を検知します。監視するデータの種類よってアラート ルールの種類が異なります。
 
 | アラート ルールの種類        | 概要                                                                                                               |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -710,7 +792,7 @@ AMA と DCR を使用して収集できるデータの種類と、指定でき�
 [Log Analytics ワークスペースの概要 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/log-analytics-workspace-overview#log-tables)
 
 
-AMA と DCR を使用してログ収集を行う場合、収集するデータ ソースの種類に関わらず、以下の前提条件を満たしているかご確認ください。
+AMA と DCR を使用してログ収集をおこなう場合、収集するデータ ソースの種類に関わらず、以下の前提条件を満たしているかご確認ください。
 
 - OS がサポートされているか
 - ネットワーク要件を満たしているか
@@ -721,19 +803,19 @@ AMA と DCR を使用してログ収集を行う場合、収集するデータ �
 [Azure Monitor エージェントの要件 | ディスク領域 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-requirements#disk-spaces)
 
 
-前提条件が確認できたら、次に DCR の作成を行います。
+前提条件が確認できたら、次に DCR の作成をおこないます。
 それぞれの作業は、Azure ポータル、コマンドライン (Azure CLI, Azure PowerShell)、ARM テンプレート等を使用して実施できます。
 ここでは、Azure ポータル を使用した方法について具体的にご紹介します。
 
 Azure ポータル での DCR の作成方法は以下をご参照ください。
 [Azure Monitor を使用して仮想マシン クライアントからデータを収集する | データ収集ルールを作成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/vm/data-collection?tabs=current#create-a-data-collection-rule)
 
-DCR が作成できたら、DCR と VM の関連付けおよび AMA のインストールを行います。
+DCR が作成できたら、DCR と VM の関連付けおよび AMA のインストールをおこないます。
 Azure ポータル で DCR を関連付けた場合、(VM に AMA が未インストールの場合は) AMA のインストールも自動で実施されます。
 [Azure Monitor でデータ収集ルールの関連付けを管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/data-collection/data-collection-rule-associations?tabs=cli#view-and-modify-associations-for-a-dcr-in-the-azure-portal)
 
 
-Azure Monitor エージェントのインストールのみを行うことも可能です。詳細は以下の公開情報をご参照ください。
+Azure Monitor エージェントのインストールのみをおこなうことも可能です。詳細は以下の公開情報をご参照ください。
  [Azure Monitor エージェントのインストールと管理 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-manage?tabs=azure-portal#installation-options) 
 
 Azure ポータル 以外の方法で DCR を作成する方法、および DCR と VM の関連付けを実施する方法については以下をご参照ください。
@@ -746,7 +828,7 @@ Log Analytics ワークスペースに収集された各種ログは、KQL を�
 ![](./StartUpGuide/5-1-2_logcollectionfromVM_samplelog.png)
 
 
-始めてクエリを実施される方は、以下弊社公開情報をご参照ください。
+はじめてクエリを実施される方は、以下弊社公開情報をご参照ください。
 [Azure Monitor ログでログ クエリの使用を開始する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/get-started-queries?tabs=kql)
 [Azure Monitor の Log Analytics の概要 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/log-analytics-overview?tabs=simple)
 
@@ -769,7 +851,82 @@ Azure Monitor エージェントの自動アップグレードを有効化する
 
 
 ### 5.1.4 コンテナーからのログ収集
-本文を入力
+AKS などのコンテナー環境の、ノード、Pod、コンテナー、Kubernetes イベント、アプリケーションの状態を継続的に監視するための機能がいくつか提供されています。主な使い分けとしては、ログや Kubernetes イベントの確認には Container Insights、Prometheus 形式のメトリック監視には Managed Prometheus を使用します。
+
+1. Container Insights: コンテナー ログ、Kubernetes イベント、インベントリ情報などを Log Analytics ワークスペースに収集するログ収集機能
+
+2. Managed Prometheus (Azure Monitor managed service for Prometheus) : Prometheus 形式のメトリックを Azure Monitor ワークスペースに収集するメトリック収集機能
+
+[Azure Monitor での Kubernetes の監視 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-overview)
+
+<br>
+
+#### 1. Container Insights について
+Container Insights は Azure Kubernetes Service (AKS) などのコンテナー環境から、コンテナー ログ、Kubernetes イベント、インベントリ情報などを収集し、Azure ポータルや Log Analytics で確認できるログ収集機能です。
+
+ノード、Pod、コンテナーなどの状態やイベントを確認し、必要に応じて Log Analytics の KQL クエリや Azure Monitor のアラートを用いた調査・監視をおこなうことが可能です。以下は、AKS リソースの [Monitor（分析情報）] で [Log Analytics の視覚化（クラシック）] を選択し、収集されたログ情報を確認している例です。
+![](./StartUpGuide/5-1-4_ContainerInsights.png)
+
+
+**Container Insights によるデータ収集の流れ**
+Container Insights の構成とデータ収集をおこなう基本的な流れは以下のとおりです。
+
+Azure ポータルもしくは Azure CLI 等により対象クラスターで Container Insights を有効化する
+↓
+コンテナー化された Azure Monitor エージェント (AMA) がデプロイされる
+↓
+コンテナー化された AMA により Log Analytics ワークスペースに各ログ データが収集される
+↓
+Azure ポータルの対象クラスター リソースにある [Monitor（分析情報）] 画面や、Log Analytics の KQL により分析・可視化できます。
+
+Container Insights の有効化方法については以下の弊社公開情報、ブログ記事をご参照ください。
+ 
+[AKS クラスターでコンテナーの分析情報とログ記録を有効にする](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable?tabs=azure-portal#enable-container-insights-and-logging-on-an-aks-cluster)
+[Container Insights のご紹介 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/HowToContainerInsights/)
+
+
+**Container Insights で収集されるログ**
+Container Insights で収集される主なログには、コンテナーの標準出力 / 標準エラー出力、Kubernetes イベント、Pod やコンテナーのインベントリ情報などがあります。収集されたログは Log Analytics ワークスペースに保存され、Azure ポータルの AKS リソースの [Monitor（分析情報）] 画面や Log Analytics の KQL クエリから確認できます。
+
+Log Analytics では、用途に応じて複数のテーブルにデータが格納されます。
+例えば、コンテナーの標準出力 / 標準エラー出力は主に ContainerLogV2 テーブルに格納され、Kubernetes イベントは KubeEvents、Pod の状態やインベントリ情報は KubePodInventory で確認できます。
+  
+Container Insights に関連するテーブルの一覧や各テーブルの詳細については、以下の公開情報で、ソリューションが ContainerInsights と記載されているテーブルをご確認ください。
+[microsoft.containerservice/managedclusters の Azure Monitor テーブル - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/reference/tables/microsoft-containerservice-managedclusters)
+
+<br>
+
+
+#### 2. Managed Prometheus について
+Managed Prometheus では、Prometheus 形式のメトリックを Azure Monitor ワークスペースに収集します。収集したメトリックは、Azure Monitor ワークスペースのメトリック エクスプローラーや Prometheus エクスプローラー、Azure Managed Grafana などから、PromQL により分析・可視化できます。
+
+以下は、AKS リソースの [Monitor（分析情報）] で [マネージド Prometheus の視覚化] を選択し、収集されたメトリック情報を確認している例です。
+![](./StartUpGuide/5-1-4_ManagedPrometheus.png)
+
+
+**Managed Prometheus によるデータ収集の流れ**
+Managed Prometheus の構成とデータ収集をおこなう基本的な流れは以下のとおりです。
+
+Azure ポータルもしくは Azure CLI 等により対象クラスターで Managed Prometheus を有効化する
+↓
+Azure Monitor Agent のメトリック アドオンが構成される
+↓
+メトリック アドオンにより Prometheus 形式のメトリックが Azure Monitor ワークスペースに収集される
+↓
+Azure ポータルの対象クラスター リソースにある [Monitor（分析情報）] 画面や、Azure Monitor ワークスペースのメトリック エクスプローラーなどから PromQL を用いて分析や可視化をおこなう
+
+Prometheus メトリックの有効化方法については以下の弊社公開情報をご確認ください。
+[AKS クラスターで Prometheus メトリックを有効にする](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable?tabs=azure-cli#enable-prometheus-metrics-on-an-aks-cluster) 
+
+
+**Managed Prometheus で収集されるメトリック**
+Managed Prometheus で既定収集される Prometheus メトリックには、kubelet、cAdvisor、kube-state-metrics、node exporter などから取得されるノード、Pod、コンテナー、Kubernetes オブジェクトのメトリックが含まれます。収集対象の詳細は、以下の Azure Monitor の既定 Prometheus メトリック構成に記載されています。
+[Azure Monitor での既定の Prometheus メトリック構成](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/prometheus-metrics-scrape-default)
+
+
+Arc 対応 Kubernetes クラスターでの Container Insights によるログ収集、および Managed Prometheus による Prometheus メトリック収集の有効化手順については、以下の公開情報をご参照ください。
+[Arc 対応 Kubernetes クラスターの監視を有効にする - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable-arc?tabs=cli)
+  
 
 <br><!-- 小項目の終わり <br> を追加する -->
 
@@ -860,10 +1017,10 @@ Web アプリや API が
 
 #### 診断設定の主な利用シナリオ
 リソース ログは既定では収集されません。
-そのため、リソース ログを収集し監視や分析を行う必要がある場合は診断設定をご利用ください。
+そのため、リソース ログを収集し監視や分析をおこなう必要がある場合は診断設定をご利用ください。
 
 アクティビティ ログおよびプラットフォーム メトリックは既定で収集されます。
-ただし、そのままではそれぞれを監視したり分析したりする方法は限られています。診断設定を利用することで様々な監視シナリオ沿う形 (Log Analytics ワークスペース、ストレージ アカウント、および Event Hub) でデータを収集し、監視や分析を行うことが可能です。
+ただし、そのままではそれぞれを監視したり分析したりする方法は限られています。診断設定を利用することで様々な監視シナリオ沿う形 (Log Analytics ワークスペース、ストレージ アカウント、および Event Hub) でデータを収集し、監視や分析をおこなうことが可能です。
 
 また、既定で収集されるアクティビティ ログおよびプラットフォーム メトリック (*2) の保持期間はそれぞれ 90 日と 93 日です。
 診断設定を用いて任意の宛先に収集することで、この保持期間を延長することが可能です。
@@ -880,8 +1037,8 @@ Web アプリや API が
 
 <br>
 
-#### 診断設定の作成方法 (リソース ログ, プラットフォーム メトリック)
-診断設定は Azure ポータル 上、Azure PowerShell や Azure CLI のコマンド、ARM テンプレートなどを用いて作成することが可能です。Azure ポータル 上での作成方法としては、大きく Azure リソースのページから行う方法と、[モニター] のページから行う方法があります。ここでは、Azure ポータル > 対象の Azure リソース > [監視] > [診断設定] からの作成方法をご紹介します。
+#### 診断設定の作成方法 (リソース ログ・プラットフォーム メトリック)
+診断設定は Azure ポータル 上、Azure PowerShell や Azure CLI のコマンド、ARM テンプレートなどを用いて作成することが可能です。Azure ポータル 上での作成方法としては、大きく Azure リソースのページからおこなう方法と、[モニター] のページからおこなう方法があります。ここでは、Azure ポータル > 対象の Azure リソース > [監視] > [診断設定] からの作成方法をご紹介します。
 
 Azure ポータル > 対象の Azure リソース > [監視] > [診断設定] > [診断設定を追加] を押下すると、以下のような作成画面が表示されます。画像のように、収集対象のデータ (ログおよびメトリック) と宛先を選択することが可能です。
 
@@ -946,7 +1103,7 @@ Log Analytics ワークスペースのデータ エクスポート機能を使�
 
 #### データ エクスポート機能の主な利用シナリオ - ストレージ アカウント
 - 改ざん防止に関するコンプライアンス: 
-Log Analytics ワークスペースに取り込まれたデータを変更することできません。しかし、以下手順で消去することは可能です。一方で、不変ポリシーが設定されたストレージ アカウントに格納されたデータは、設定した保持期間を超えるまでは変更、削除いずれも出来ません。そのため、データの改ざん (消去) 防止の要件がある場合は、不変ポリシーが設定されたストレージ アカウントにエクスポートすることをご検討ください。
+Log Analytics ワークスペースに取り込まれたデータを変更することできません。しかし、以下手順で消去することは可能です。一方で、不変ポリシーが設定されたストレージ アカウントに格納されたデータは、設定した保持期間を超えるまでは変更、削除いずれもできません。そのため、データの改ざん (消去) 防止の要件がある場合は、不変ポリシーが設定されたストレージ アカウントにエクスポートすることをご検討ください。
 [Log Analytics ワークスペースのデータを削除する方法 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/LogAnalyticsWorkspacePurge/)
 
 
@@ -995,7 +1152,7 @@ Japan Azure Networking サポート チームのブログは下記リンクよ�
 [Japan Azure IaaS Core Support Blog](https://jpaztech.github.io/blog/index.html)
 
 
-<br><!-- 小項目の終わり <br> を追加する -->.
+<br><!-- 小項目の終わり <br> を追加する -->
 <br><!-- 中項目の終わり <br> を追加する -->
 
 
@@ -1187,7 +1344,7 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 ![](./StartUpGuide/5-2-5_resourcehealth_activitylog.png)
 
 
-リソース正常性アラート（アクティビティ ログ アラート）は、指定した条件に一致するアクティビティ ログ イベントが発生しているかどうかを評価します。監視対象のサービスやリージョンに関するサービス正常性イベントのアクティビティ ログが記録されると、アラートが発報します。
+リソース正常性アラート（アクティビティ ログ アラート）は、指定した条件に一致するアクティビティ ログ イベントが発生しているかどうかを評価します。監視対象のリソースで条件に一致したリソース正常性イベントのアクティビティ ログが記録されると、アラートが発報します。
 ![](./StartUpGuide/5-2-5_resourcehealthalert_portal.png)
 
 
@@ -1284,7 +1441,7 @@ Perf
 
 
 ### 5.2.7 ストレージ アカウントに収集したデータの可視化
-[5.1.6 診断設定](#5-1-6-診断設定)や [5.1.8 データ エクスポート](#5-1-8-データ-エクスポート)にて、ストレージ アカウントに出力したログ ファイルに対してもクエリを実行することが可能です。本記事では次の 2 つのアプローチを紹介します。
+[5.1.7 診断設定](#5-1-7-診断設定)や [5.1.8 データ エクスポート](#5-1-8-データ-エクスポート)にて、ストレージ アカウントに出力したログ ファイルに対してもクエリを実行することが可能です。本記事では次の 2 つのアプローチを紹介します。
 
 1 つは Azure Data Explorer に BLOB（ログ ファイル）を取り込んで分析する方法、もう 1 つは Log Analytics ワークスペースで externaldata 演算子を使ってクエリを実行する方法です。それぞれの詳細な手順は、以下のセクションで解説します。
 [Azure Data Explorer を使う方法](#azure-data-explorer)
@@ -1441,7 +1598,7 @@ Azure ワークブックを利用することで、様々な Azure リソース�
     *   [マップ](https://learn.microsoft.com/ja-jp/azure/azure-monitor/visualize/workbooks-visualizations#maps)
     *   [テキストの視覚化](https://learn.microsoft.com/ja-jp/azure/azure-monitor/visualize/workbooks-visualizations#text-visualizations)
 
-**4. Azure ワークブックのパラメータ機能**
+**4. Azure ワークブックのパラメーター機能**
  Azure Workbooks の大きな特徴の一つが、パラメーター機能です。
 パラメーターを使用すると、利用者からの入力を受け取り、その値をワークブック内の他のクエリやビジュアルで参照できます。
 具体的には以下のような対話型のレポートを作成することができます。
@@ -1464,17 +1621,17 @@ Azure ブックには [Azure Portal] - [モニター] - [ブック] よりアク
 
 
 2. テンプレートの表示・編集
-[ギャラリー] に表示されているテンプレートを開き、 パラメーターを選択してグラフや表をカスタマイズできます。さらに、画面上部の [編集] を選択すると編集モードに切り替わります。 編集モードでは、グラフや表の設定変更、パラメータの追加・並べ替えが可能です。テンプレートの表示・編集の詳細については[Azure Workbooks テンプレート](https://learn.microsoft.com/ja-jp/azure/azure-monitor/visualize/workbooks-templates)をご参照ください。
+[ギャラリー] に表示されているテンプレートを開き、 パラメーターを選択してグラフや表をカスタマイズできます。さらに、画面上部の [編集] を選択すると編集モードに切り替わります。 編集モードでは、グラフや表の設定変更、パラメーターの追加・並べ替えが可能です。テンプレートの表示・編集の詳細については[Azure Workbooks テンプレート](https://learn.microsoft.com/ja-jp/azure/azure-monitor/visualize/workbooks-templates)をご参照ください。
 ![](./StartUpGuide/5-3-1_workbook_edit.png)
 
 3. パラメーターの作成
 パラメーターにより表示時間を切り替えるブックの作成方法について以下にご紹介します。
 ブックのパラメーターの詳細は、[ブックのパラメーター](https://learn.microsoft.com/ja-jp/azure/azure-monitor/visualize/workbooks-parameters) をご参照ください。
-ⅰ. パラメータを追加します。
+ⅰ. パラメーターを追加します。
 ![](./StartUpGuide/5-3-1_workbook_add_parameter.png)
-ⅱ. パラメータの型を 「時間の範囲の選択」を選びます。
+ⅱ. パラメーターの型を 「時間の範囲の選択」を選びます。
 ![](./StartUpGuide/5-3-1_workbook_parameter_type.png)
-ⅲ. つづいて ブック にクエリを追加し、[時間範囲] で先に作成したパラメータ名を指定します。
+ⅲ. つづいて ブック にクエリを追加し、[時間範囲] で先に作成したパラメーター名を指定します。
 ![](./StartUpGuide/5-3-1_workbook_parameter_name.png)
 ⅳ. 編集完了後、パラメーターの値を変更すると自動でグラフが変化します。
 ![](./StartUpGuide/5-3-1_workbook_graph.png)
@@ -1635,7 +1792,7 @@ GDPR（EU 一般データ保護規則）の要件に準拠する必要がある�
 
 ## 6.3 Azure Monitor Private Link Scope (AMPLS)
 ### AMPLSの概要
-AMPLS（Azure Monitor Private Link）を構成することで、 Azure Monitor（Log Analytics や Application Insights など）への通信をパブリック インターネットを経由せず、プライベート ネットワーク経由で行うことが可能になります。
+AMPLS（Azure Monitor Private Link）を構成することで、 Azure Monitor（Log Analytics や Application Insights など）への通信をパブリック インターネットを経由せず、プライベート ネットワーク経由でおこなうことが可能になります。
 [Azure Private Link を使用して、ネットワークを Azure Monitor に接続する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/fundamentals/private-link-security)
 
 
@@ -1647,7 +1804,7 @@ AMPLSの基本的な概念については以下公開情報をご参照くださ
 
 
 **AMPLS を構成するとできること**
-たとえば次のような要件に対応できます。
+例えば、次のような要件に対応できます。
 -  インターネットへの outbound を厳しく制限したまま、VM から Log Analytics にログを送信したい
    > VNet 内の Private Endpoint 経由で Azure Monitor のエンドポイントへ到達できるため、監視データがパブリック インターネットを経由しない設計が可能です。
 -  特定のネットワークからのみ Log Analytics ワークスペースに対するクエリ（KQL）を許可したい
