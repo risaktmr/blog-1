@@ -25,7 +25,7 @@ tags:
   - [4.2 仮想マシン ホストのパフォーマンス監視](#4-2-仮想マシン-ホストのパフォーマンス監視)
   - [4.3 Azure VM のゲスト OS のパフォーマンス監視](#4-3-Azure-VM-のゲスト-OS-のパフォーマンス監視)
   - [4.4 仮想マシン ログの監視](#4-4-仮想マシン-ログの監視)
-  - [4.5 OS 内のサービス監視](#4-5-os-内のサービス監視)
+  - [4.5 OS 内のサービス監視](#4-5-OS-内のサービス監視)
   - [4.6 アラート ルールの設定](#4-6-アラート-ルールの設定)
   - [4.7 サービス正常性](#4-7-サービス正常性)
 - [5. 各機能とソリューション](#5-各機能とソリューション)
@@ -40,7 +40,7 @@ tags:
     - [5.1.8 データ エクスポート](#5-1-8-データ-エクスポート)
     - [5.1.9 ネットワークの監視](#5-1-9-ネットワークの監視)
   - [5.2 分析とレポート](#5-2-分析とレポート)
-    - [5.2.1 Log Analytics ワークスペースのクエリ](#5-2-1-log-analytics-ワークスペースのクエリ)
+    - [5.2.1 Log Analytics ワークスペースのクエリ](#5-2-1-Log-Analytics-ワークスペースのクエリ)
     - [5.2.2 ログ アラート ルール](#5-2-2-ログ-アラート-ルール)
     - [5.2.3 メトリック アラート ルール](#5-2-3-メトリック-アラート-ルール)
     - [5.2.4 アクティビティ ログ アラート](#5-2-4-アクティビティ-ログ-アラート)
@@ -56,7 +56,7 @@ tags:
 - [6. セキュリティ](#6-セキュリティ)
   - [6.1 データ保護](#6-1-データ保護)
   - [6.2 データ削除](#6-2-データ削除)
-  - [6.3 Azure Monitor Private Link Scope (AMPLS)](#6-3-Azure-Monitor-Private-Link-Scope-Ampls)
+  - [6.3 Azure Monitor Private Link Scope (AMPLS)](#6-3-Azure-Monitor-Private-Link-Scope-AMPLS)
 
 
 <br>
@@ -301,7 +301,7 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 ## 2.2 リタイア予定の製品
 本項では、Azure Monitor で以前提供されていた機能やソリューションのうち 2026 年 7 月 1 日時点で今後廃止予定のものを記載しています。本情報は、公開情報をもとに Azure Monitor に関連する主なリタイア予定を整理したものであり、すべての変更を網羅していることを保証するものではありません。また、リタイア日や影響範囲は変更される場合があります。  
-ご利用の環境がリタイアの影響を受ける場合、原則として[サービス正常性](https://learn.microsoft.com/ja-jp/azure/service-health/overview)を通じて対象サブスクリプションへ通知される予定です。実際の影響、対応期限、および必要な作業については、Azure ポータルの **［サービス正常性］>［正常性に関する勧告］** に表示される通知を必ずご確認ください。
+ご利用の環境がリタイアの影響を受ける場合、原則として[サービス正常性](https://learn.microsoft.com/ja-jp/azure/service-health/overview)を通じて対象サブスクリプションへ通知される予定です。実際の影響、対応期限、および必要な作業については、Azure ポータル > [モニター (監視)] > **[サービスの正常性] > [正常性に関する勧告]** に表示される通知を必ずご確認ください。
 
 | リタイア予定日 | 対象機能 | 主な対応 |
 |------|---|---|
@@ -444,7 +444,7 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 ### 4.1 仮想マシンの死活監視
 本項では Azure VM が期待どおり稼働しているかを確認し、VM の停止や OS からの応答を検知する死活監視について記載します。
-Azure Monitor における Azure VM の死活監視では、Azure 基盤側とゲスト OS 側の２つのレイヤーがあり、レイヤー毎に監視対象や方法が異なります。
+Azure Monitor における Azure VM の死活監視では、Azure 基盤側とゲスト OS 側の 2 つのレイヤーがあり、レイヤーごとに監視対象や方法が異なります。
 
 **■ Azure 基盤側の監視**
 VM の可用性メトリックやリソース正常性の監視を死活監視に利用する方法です。
@@ -645,7 +645,7 @@ Azure Monitor には、各種 Azure サービスやリソースを監視する�
 
 
 ### 4.7 サービス正常性
-サービス正常性は、Azure サービス正常性のイベント（サービスに関する問題、計画メンテナンス、正常性の勧告、セキュリティ アドバイザリ、課金情報の更新）の情報を提供する機能です。ご利用いただいている Azure サービスおよびリージョンに影響がある正常性イベントが発生すると、Azure ポータル > サービスの正常性に情報が表示されます。
+サービス正常性は、Azure サービス正常性のイベント（サービスに関する問題、計画メンテナンス、正常性の勧告、セキュリティ アドバイザリ、課金情報の更新）の情報を提供する機能です。ご利用いただいている Azure サービスおよびリージョンに影響がある正常性イベントが発生すると、Azure ポータル > [モニター (監視)] > [サービスの正常性] に情報が表示されます。
 ![](./StartUpGuide/4-7_servicehealth_portal.png)
 
 
@@ -708,7 +708,7 @@ Azure で扱われるメトリックには以下の 3 種類があります。
 アクティビティ ログには各 Azure リソースの操作等のログ、サービス正常性、リソース正常性があります。
 
 **■ アクティビティ ログ (操作等のログ)**
-[モニター (監視)] > [アクティビティ ログ] にてサブスクリプション内の Azure リソースに対して実行された操作等のログの一覧を確認できます。
+Azure ポータル > [モニター (監視)] > [アクティビティ ログ] にてサブスクリプション内の Azure リソースに対して実行された操作等のログの一覧を確認できます。
 ![](./StartUpGuide/5-1-7_activitylog1.png)
 <!--<5-1-7_activitylog1.png>-->
 
@@ -722,7 +722,7 @@ Azure で扱われるメトリックには以下の 3 種類があります。
 
 **■ サービス正常性**
 サービス正常性ではご利用の Azure サービスの障害や計画メンテナンス、サービスの廃止などのイベントについて表示します。
-[監視/モニター] > [サービス正常性] > [有効なイベント] もしくは [履歴] をクリックして確認します。
+Azure ポータル > [モニター (監視)] > [サービスの正常性] > [有効なイベント] もしくは [履歴] をクリックして確認します。
 [有効なイベント] には現時点でアクティブなサービス正常性が表示され、[履歴] には過去のサービス正常性イベントが表示されます。
 ![](./StartUpGuide/5-1-7_activitylog2.png)
 
@@ -734,7 +734,7 @@ Azure で扱われるメトリックには以下の 3 種類があります。
 
 **■ リソース正常性**
 リソース正常性では、ご利用の Azure リソースが正常であるかどうかを評価し、リソースの状態が [利用可能 (Available)]、[使用不可 (Unavailable)]、[不明 (Unknown)]、[低下 (Degraded)] のいずれかの状態と表示します。
-[監視/モニター] > [サービス正常性] > [リソース正常性] にて、確認したいリソースの種類を指定して確認します。
+Azure ポータル > [モニター (監視)] > [サービスの正常性] > [リソース正常性] にて、確認したいリソースの種類を指定して確認します。
 ![](./StartUpGuide/5-1-7_activitylog4.png)
 
 ![](./StartUpGuide/5-1-7_activitylog5.png)
@@ -850,7 +850,7 @@ AKS などのコンテナー環境の、ノード、Pod、コンテナー、Kube
 **1. Container Insights について**
 Container Insights は Azure Kubernetes Service (AKS) などのコンテナー環境から、コンテナー ログ、Kubernetes イベント、インベントリ情報などを収集し、Azure ポータルや Log Analytics で確認できるログ収集機能です。
 
-ノード、Pod、コンテナーなどの状態やイベントを確認し、必要に応じて Log Analytics の KQL クエリや Azure Monitor のアラートを用いた調査・監視を行うことが可能です。以下は、AKS リソースの [Monitor（分析情報）] で [Log Analytics の視覚化（クラシック）] を選択し、収集されたログ情報を確認している例です。
+ノード、Pod、コンテナーなどの状態やイベントを確認し、必要に応じて Log Analytics の KQL クエリや Azure Monitor のアラートを用いた調査・監視を行うことが可能です。以下は、AKS リソースの [モニター (分析情報)] で [Log Analytics の視覚化（クラシック）] を選択し、収集されたログ情報を確認している例です。
 ![](./StartUpGuide/5-1-4_ContainerInsights.png)
 
 <br>
@@ -864,7 +864,7 @@ Container Insights の構成とデータ収集を行う基本的な流れは以�
 ↓
 - コンテナー化された AMA により Log Analytics ワークスペースに各ログ データが収集される
 ↓
-- Azure ポータルの対象クラスター リソースにある [Monitor（分析情報）] 画面や、Log Analytics の KQL により分析・可視化できます。
+- Azure ポータル > 対象のクラスター リソース > [モニター (分析情報)] の画面や、Log Analytics の KQL により分析・可視化できます。
 
 Container Insights の有効化方法については以下の公開情報やブログをご参照ください。
 [Azure Kubernetes Service (AKS) クラスターの監視を有効にする - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable?tabs=azure-portal#enable-container-insights-and-logging-on-an-aks-cluster)
@@ -873,7 +873,7 @@ Container Insights の有効化方法については以下の公開情報やブ�
 <br>
 
 **■ Container Insights で収集されるログ**
-Container Insights で収集される主なログには、コンテナーの標準出力 / 標準エラー出力、Kubernetes イベント、Pod やコンテナーのインベントリ情報などがあります。収集されたログは Log Analytics ワークスペースに保存され、Azure ポータルの AKS リソースの [Monitor（分析情報）] 画面や Log Analytics の KQL クエリから確認できます。
+Container Insights で収集される主なログには、コンテナーの標準出力 / 標準エラー出力、Kubernetes イベント、Pod やコンテナーのインベントリ情報などがあります。収集されたログは Log Analytics ワークスペースに保存され、Azure ポータル > 対象の AKS リソース > [モニター (分析情報)] の画面や Log Analytics の KQL クエリから確認できます。
 
 Log Analytics では、用途に応じて複数のテーブルにデータが格納されます。
 例えば、コンテナーの標準出力 / 標準エラー出力は主に ContainerLogV2 テーブルに格納され、Kubernetes イベントは KubeEvents、Pod の状態やインベントリ情報は KubePodInventory で確認できます。
@@ -887,7 +887,7 @@ Container Insights に関連するテーブルの一覧や各テーブルの詳�
 **2. Managed Prometheus について**
 Managed Prometheus では、Prometheus 形式のメトリックを Azure Monitor ワークスペースに収集します。収集したメトリックは、Azure Monitor ワークスペースのメトリック エクスプローラーや Prometheus エクスプローラー、Azure Managed Grafana などから、PromQL により分析・可視化できます。
 
-以下は、AKS リソースの [Monitor（分析情報）] で [マネージド Prometheus の視覚化] を選択し、収集されたメトリック情報を確認している例です。
+以下は、AKS リソースの [モニター (分析情報)] で [マネージド Prometheus の視覚化] を選択し、収集されたメトリック情報を確認している例です。
 ![](./StartUpGuide/5-1-4_ManagedPrometheus.png)
 
 <br>
@@ -901,7 +901,7 @@ Managed Prometheus の構成とデータ収集を行う基本的な流れは以�
 ↓
 - メトリック アドオンにより Prometheus 形式のメトリックが Azure Monitor ワークスペースに収集される
 ↓
-- Azure ポータルの対象クラスター リソースにある [Monitor（分析情報）] 画面や、Azure Monitor ワークスペースのメトリック エクスプローラーなどから PromQL を用いて分析や可視化を行う
+- Azure ポータル > 対象のクラスター リソース > [モニター (分析情報)] の画面や、Azure Monitor ワークスペースのメトリック エクスプローラーなどから PromQL を用いて分析や可視化を行う
 
 Prometheus メトリックの有効化方法については以下の公開情報をご参照ください。
 [Azure Kubernetes Service (AKS) クラスターの監視を有効にする - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable?tabs=azure-cli#enable-prometheus-metrics-on-an-aks-cluster)
@@ -956,7 +956,7 @@ Web アプリや API が
 自動インストルメンテーションを利用できるシナリオは以下の公開情報をご参照ください。
 [Azure Monitor Application Insights の自動インストルメンテーション - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/app/codeless-overview)
 
-例えば、Azure App Service では Azure ポータルの [監視] > [Application Insights] から自動インストルメンテーションを有効化します。
+例えば、Azure App Service では Azure ポータル > 対象の App Service > [監視] > [Application Insights] から自動インストルメンテーションを有効化します。
 ![](./StartUpGuide/5-1-4_applicationinsights_auto_instrumentation.png)
 
 <br>
@@ -973,7 +973,7 @@ Web アプリや API が
 可用性テストでは、世界中のさまざまな場所から Web リクエストをアプリケーションに定期的に送信します。
 アラート ルールの設定も可能で、アプリケーションの応答がない場合や応答が遅い場合はユーザーに警告も可能です。
 
-可用性テストは Application Insights の [調査] > [有効] から設定と結果の確認ができます。
+可用性テストは Azure ポータル > 対象の Application Insights > [調査] > [有効] から設定と結果の確認ができます。
 ![](./StartUpGuide/5-1-4_webtest.png)
 
 
@@ -1010,7 +1010,7 @@ Web アプリや API が
 そのため、リソース ログを収集し監視や分析を行う必要がある場合は診断設定をご利用ください。
 
 アクティビティ ログおよびプラットフォーム メトリックは既定で収集されます。
-ただし、そのままではそれぞれを監視したり分析したりする方法は限られています。診断設定を利用することで様々な監視シナリオに沿う形 (Log Analytics ワークスペース、ストレージ アカウント、および Event Hub) でデータを収集し、監視や分析を行うことが可能です。
+ただし、そのままではそれぞれを監視したり分析したりする方法は限られています。診断設定を利用することで様々な監視シナリオに沿う形 (Log Analytics ワークスペース、ストレージ アカウント、および Event Hubs) でデータを収集し、監視や分析を行うことが可能です。
 
 また、既定で収集されるアクティビティ ログおよびプラットフォーム メトリックの保持期間はそれぞれ 90 日と 93 日です。
 診断設定を用いて任意の宛先に収集することで、この保持期間を延長することが可能です。
@@ -1021,7 +1021,7 @@ Web アプリや API が
 <br>
 
 **■ 診断設定の作成方法 (リソース ログ・プラットフォーム メトリック)**
-診断設定は Azure ポータル上、Azure PowerShell や Azure CLI のコマンド、ARM テンプレートなどを用いて作成することが可能です。Azure ポータル上での作成方法としては、大きく Azure リソースのページから行う方法と、[モニター] のページから行う方法があります。ここでは、Azure ポータル > 対象の Azure リソース > [監視] > [診断設定] からの作成方法をご紹介します。
+診断設定は Azure ポータル上、Azure PowerShell や Azure CLI のコマンド、ARM テンプレートなどを用いて作成することが可能です。Azure ポータル上での作成方法としては、大きく Azure リソースのページから行う方法と、[モニター (監視)] のページから行う方法があります。ここでは、Azure ポータル > 対象の Azure リソース > [監視] > [診断設定] からの作成方法をご紹介します。
 
 Azure ポータル > 対象の Azure リソース > [監視] > [診断設定] > [診断設定を追加] をクリックすると、以下のような作成画面が表示されます。画像のように、収集対象のデータ (ログおよびメトリック) と宛先を選択することが可能です。
 
@@ -1045,7 +1045,7 @@ Log Analytics ワークスペースに収集した場合は以下のように確
 リソース ログは Log Analytics ワークスペースの AzureDiagnostics テーブルに収集されます。
 ただし、一部のリソース種では設定によりリソース固有のテーブルに収集することも可能です。
 
-※ EventHub のリソース固有テーブルへクエリしたときの例
+※ Event Hubs のリソース固有テーブルへクエリしたときの例
 ![](./StartUpGuide/5-1-6_ResourceSpecificTable.png)
 
 
@@ -1131,8 +1131,8 @@ Azure サービスおよびその他のツールとの統合: Event Hubs にエ�
 Network Watcher は、仮想マシン (VM)、仮想ネットワーク (VNet)、アプリケーション ゲートウェイ、ロード バランサーなどの IaaS 製品のネットワーク正常性の監視や修復が可能なサービスです。
 [Azure Network Watcher の概要 | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/network-watcher/network-watcher-overview?toc=%2Fazure%2Fazure-monitor%2Ftoc.json)
 
-Network Watcher の機能の一つであるネットワークの分析情報は、Azure ポータル上の [監視/モニター] > [分析情報] > [ネットワーク] にて確認できます。
-![](./StartUpGuide/5-1-9_netowok_monitor1.png)
+Network Watcher の機能の一つであるネットワークの分析情報は、Azure ポータル > [モニター (監視)] > [分析情報] > [ネットワーク] にて確認できます。
+![](./StartUpGuide/5-1-9_network_monitor1.png)
 
 [ネットワークの分析情報 | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/network-watcher/network-insights-overview?toc=%2Fazure%2Fazure-monitor%2Ftoc.json)
 
@@ -1154,8 +1154,7 @@ Network Watcher の機能の一つであるネットワークの分析情報は�
 各種の Azure リソースやマシンから Log Analytics ワークスペースに収集したデータはクエリを実行して確認します。
 
 **■ クエリのモード**
-クエリを実行する 2 種類のモードがあります。
-簡易モードでは [ログ] > [テーブル] > [対象テーブルの実行] をクリックすることで、簡単にクエリを実行可能です。
+クエリを実行する 2 種類のモードがあります。簡易モードでは Azure ポータル > 対象の Log Analytics ワークスペース > [ログ] > [テーブル] > [対象テーブルの実行] をクリックすることで、簡単にクエリを実行可能です。
 ![](./StartUpGuide/5-2-1_loganalyticsworkspace_query1.png)
 
 
@@ -1182,7 +1181,7 @@ Log Analytics ワークスペースのアクセス制御モードには 2 種類
 ![](./StartUpGuide/5-2-1_loganalyticsworkspace_query4.png)
 
 
-リソース コンテキスト アクセス制御モードでは各 Azure リソース (例: Azure VM) の画面左側メニューの [監視] > [ログ] からアクセスすることで、対象のリソースから Log Analytics ワークスペースに収集されたログのみを参照します。
+リソース コンテキスト アクセス制御モードでは Azure ポータル > 対象の Azure リソース > [監視] > [ログ] からアクセスすることで、対象のリソースから Log Analytics ワークスペースに収集されたログのみを参照します。
 
 ※ リソース コンテキスト アクセス制御モードの場合の例
 ![](./StartUpGuide/5-2-1_loganalyticsworkspace_query5.png)
@@ -1510,8 +1509,7 @@ Log Analytics ワークスペースの [ログ] から `externaldata` 演算子
 #### 5.2.8 Application Insights のクエリ
 Application Insights に記録されたログは、Application Insights が Log Analytics ワークスペースと統合されているため、Application Insights と Log Analytics ワークスペースの両方から参照できます。
 
-Application Insights は [監視] > [ログ] からクエリを実行します。
-UI の構成や機能は同じであるため、クエリの実行方法については本記事 [5.2.1 Log Analytics ワークスペースのクエリ](#5-2-1-log-analytics-ワークスペースのクエリ) をご参照ください。ただし、ご留意いただく点が 2 つあります。
+Application Insights は Azure ポータル > Application Insights / Log Analytics ワークスペース > [監視] > [ログ] からクエリを実行します。UI の構成や機能は同じであるため、クエリの実行方法については本記事 [5.2.1 Log Analytics ワークスペースのクエリ](#5-2-1-Log-Analytics-ワークスペースのクエリ) をご参照ください。ただし、ご留意いただく点が 2 つあります。
 
 
 **1. Application Insights と Log Analytics ワークスペースで同じデータを参照する場合のテーブルとカラムが異なります。**
@@ -1606,7 +1604,7 @@ Azure Workbooks の大きな特徴の一つが、パラメーター機能です�
 
 **6. Azure ワークブックの作成**
 1. Azure ブックへのアクセス
-Azure ブックには Azure ポータル > [モニター] > [ブック] よりアクセスすると、[ギャラリー] に Azure ブックのテンプレートが一覧表示されます。
+Azure ブックには Azure ポータル > [モニター (監視)] > [ブック] よりアクセスすると、[ギャラリー] に Azure ブックのテンプレートが一覧表示されます。
 ![](./StartUpGuide/5-3-1_workbook_menu.png)
 
 
@@ -1639,7 +1637,7 @@ Log Analytics ワークスペース内のログに対して実行したクエリ
 
 **■ ログ クエリの可視化手順**
 Log Analytics ワークスペースにてクエリを実行します。
-クエリの実行方法については、本記事 [5.2.1 Log Analytics ワークスペースのクエリ](#5-2-1-log-analytics-ワークスペースのクエリ) をご参照ください。
+クエリの実行方法については、本記事 [5.2.1 Log Analytics ワークスペースのクエリ](#5-2-1-Log-Analytics-ワークスペースのクエリ) をご参照ください。
 
 ```
 <サンプル クエリ>
@@ -1668,7 +1666,7 @@ Azure ワークブックの詳細は、本記事 [5.3.1 ワークブック](#5-3
 - 分析内容のカスタマイズ性が高い (KQL 等にて分析内容を要件に併せて変更できます。) 
 - 設定が比較的難しいため利用難度が高い
 
-※ Azure ワークブックは Azure ポータル上の [監視/モニター] > [ブック] からアクセスできます。
+※ Azure ワークブックは Azure ポータル > [モニター (監視)] > [ブック] からアクセスできます。
 ![](./StartUpGuide/5-3-2_dashboard3.png)
 
 <br>
@@ -1696,7 +1694,7 @@ Azure ワークブックの詳細は、本記事 [5.3.1 ワークブック](#5-3
 
 #### 5.3.3 メトリック エクスプローラー
 メトリック エクスプローラーではメトリックを時系列のグラフとして可視化します。
-各 Azure リソースの画面左側メニューの [監視] > [メトリック] からメトリック エクスプローラーにアクセスします。
+Azure ポータル > 対象の Azure リソース > [監視] > [メトリック] からメトリック エクスプローラーにアクセスします。
 以下は Azure VM のプラットフォーム メトリック (ホスト メトリック) とゲスト メトリックの表示の例です。
 
 **■ プラットフォーム メトリック**
