@@ -319,7 +319,7 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 <br>
 
-#### 仮想マシン クライアント データを Event Hubs とストレージ アカウントに送信する（プレビュー）
+#### 仮想マシン クライアント データを Event Hubs とストレージ アカウントに送信する （プレビュー）
 2026 年 7 月 31 日に廃止予定です。Azure Monitor エージェントで Event Hubs やストレージ アカウントに仮想マシンのデータを直接送信する機能をプレビューで提供していましたが、廃止までに代替の送信方法 (Log Analytics のデータ エクスポート機能など) への切り替えをご検討ください。
 
 [Event Hubs と Storage にデータを送信する (プレビュー) - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/vm/send-event-hubs-storage?tabs=windows%2Cwindows-1)
