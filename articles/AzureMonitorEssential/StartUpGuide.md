@@ -306,9 +306,9 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 | リタイア予定日 | 対象機能 | 主な対応 |
 |------|---|---|
-| 2026 年 7 月 31 日 | Azure Monitor エージェントから Event Hubs／ストレージへ仮想マシンのクライアント データを直接送信する機能（プレビュー） | Log Analytics のデータ エクスポートなど、代替の送信方法へ切り替え |
+| 2026 年 7 月 31 日 | Azure Monitor エージェントから Event Hubs／ストレージへ仮想マシンのクライアント データを直接送信する機能 （プレビュー） | Log Analytics のデータ エクスポートなど、代替の送信方法へ切り替え |
 | 2026 年 9 月 14 日 | HTTP Data Collector API | DCR ベースのログ インジェスト API へ移行 |
-| 2026 年 9 月 15 日 | Azure Activity Log のレガシー転送方式 | Azure Monitor の診断設定へ移行 |
+| 2026 年 9 月 15 日 | アクティビティ ログのレガシー転送方式 | Azure Monitor の診断設定へ移行 |
 | 2026 年 9 月 30 日 | Container Insights の ContainerLog テーブル | ContainerLogV2 テーブルへ移行し、クエリやアラート ルールを更新 |
 | 2026 年 9 月 30 日 | Container Insights のレガシー認証 | マネージド ID 認証へ移行 |
 | 2026 年 9 月 30 日 | Application Insights API キー | Microsoft Entra ID 認証へ移行 |
@@ -319,7 +319,7 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 <br>
 
-#### 仮想マシン クライアント データを Event Hubs とストレージ アカウントに送信する (プレビュー)
+#### 仮想マシン クライアント データを Event Hubs とストレージ アカウントに送信する（プレビュー）
 2026 年 7 月 31 日に廃止予定です。Azure Monitor エージェントで Event Hubs やストレージ アカウントに仮想マシンのデータを直接送信する機能をプレビューで提供していましたが、廃止までに代替の送信方法 (Log Analytics のデータ エクスポート機能など) への切り替えをご検討ください。
 
 [Event Hubs と Storage にデータを送信する (プレビュー) - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/vm/send-event-hubs-storage?tabs=windows%2Cwindows-1)
@@ -336,11 +336,10 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 <br>
 
-#### Azure Activity Log のレガシー転送方式
-2026 年 9 月 15 日に廃止予定です。Azure Activity Log を Log Analytics ワークスペース、Event Hubs、またはストレージ アカウントへ転送するレガシー方式は廃止期日までに診断設定へ移行されます。
+#### アクティビティ ログのレガシー転送方式
+2026 年 9 月 15 日に廃止予定です。アクティビティ ログを Log Analytics ワークスペース、Event Hubs、またはストレージ アカウントへ転送するレガシー方式をご利用されている場合は、廃止期日までに診断設定へ移行をお願いいたします。
 
 [従来の収集方法 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/previous-versions/azure/azure-monitor/essentials/legacy-collection-methods?tabs=powershell)
-[Azure Activity Logs Legacy solution is replaced by Diagnostic settings](https://azure.microsoft.com/ja-jp/updates?id=azure-activity-logs-legacy-solution-is-replaced-by-diagnostic-settings)　
 
 <br>
 
@@ -865,7 +864,7 @@ Container Insights の構成とデータ収集を行う基本的な流れは以�
 ↓
 - コンテナー化された AMA により Log Analytics ワークスペースに各ログ データが収集される
 ↓
-- Azure ポータル > 対象のクラスター リソース > [モニター (分析情報)] の画面や、Log Analytics の KQL により分析・可視化できます。
+- Azure ポータル > 対象のクラスター リソース > [モニター (分析情報)] の画面や、Log Analytics の KQL により分析や可視化を行う
 
 Container Insights の有効化方法については以下の公開情報やブログをご参照ください。
 [Azure Kubernetes Service (AKS) クラスターの監視を有効にする - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable?tabs=azure-portal#enable-container-insights-and-logging-on-an-aks-cluster)
@@ -1090,10 +1089,10 @@ Log Analytics ワークスペースに取り込まれたデータを変更する
 [Log Analytics ワークスペースのデータを削除する方法 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/LogAnalyticsWorkspacePurge/)
 
 
-**データの冗長化および長期保持**
-監査データやセキュリティ データ等、冗長化や長期保存が必要であるデータについて、Log Analytics ワークスペースと同一リージョンにあるストレージ アカウントへのエクスポートをご利用いただけます。GRS、GZRS など、ストレージ アカウントの冗長オプションを使用することで、他のリージョンにデータをレプリケートすることができます。
+**データの冗長化および長期保管**
+監査データやセキュリティ データ等、冗長化や長期保管が必要であるデータについて、Log Analytics ワークスペースと同一リージョンにあるストレージ アカウントへのエクスポートをご利用いただけます。GRS、GZRS など、ストレージ アカウントの冗長オプションを使用することで、他のリージョンにデータをレプリケートすることができます。
 
-また、ストレージ アカウントにエクスポートされたデータは、Log Analytics ワークスペースに設定された保持期間の影響は受けないため、ストレージ アカウントにログをエクスポートし、ストレージ アカウントで長期保持することが可能です。さらに、ストレージ アカウントのライフサイクル管理ポリシーを利用することで、ストレージ アカウントにエクスポートされたデータを管理する (一定期間を過ぎた後に自動で削除する等) ことが可能です。
+また、ストレージ アカウントにエクスポートされたデータは、Log Analytics ワークスペースに設定された保持期間の影響は受けないため、ストレージ アカウントにログをエクスポートし、ストレージ アカウントで長期保管することが可能です。さらに、ストレージ アカウントのライフサイクル管理ポリシーを利用することで、ストレージ アカウントにエクスポートされたデータを管理する (一定期間を過ぎた後に自動で削除する等) ことが可能です。
 
 
 ストレージ アカウントのライフサイクル管理については、以下の公開情報をご参照ください。
@@ -1289,7 +1288,7 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 
 
 **1. 条件に一致するアクティビティ ログが記録されているかどうかを評価する**
-監視する Azure サービス、リージョン、イベントの種類を指定します。サービス正常性アラートは、ご利用いただいているサービスのご利用いただいているリージョンを対象としたイベントが発生した場合にのみ通知が行われる仕組みのため、"サービス" や "リージョン" はすべて選択いただくことを推奨しております。
+監視する Azure サービス、リージョン、イベントの種類を指定します。サービス正常性アラートは、ご利用いただいているサービスおよびリージョンを対象としたイベントが発生した場合にのみ通知が行われる仕組みのため、"サービス" や "リージョン" はすべて選択いただくことを推奨しております。
 ![](./StartUpGuide/5-2-5_servicehealthalert_settings.png)
 
 例. Azure OpenAI Service の正常性の勧告
@@ -1611,7 +1610,7 @@ Azure ワークブックには Azure ポータル > [モニター (監視)] > [�
 パラメーターにより表示時間を切り替えるブックの作成方法について以下にご紹介します。
 ⅰ. パラメーターを追加します。
 ![](./StartUpGuide/5-3-1_workbook_add_parameter.png)
-ⅱ. パラメーターの型を「時間の範囲の選択」を選びます。
+ⅱ. パラメーターの型では「時間の範囲の選択」を選びます。
 ![](./StartUpGuide/5-3-1_workbook_parameter_type.png)
 ⅲ. つづいてブックにクエリを追加し、[時間範囲] で先に作成したパラメーター名を指定します。
 ![](./StartUpGuide/5-3-1_workbook_parameter_name.png)
@@ -1667,20 +1666,19 @@ Azure ワークブックの詳細は、本記事 [5.3.1 ワークブック](#5-3
 <br>
 
 **ダッシュボード**
-*   画面の表示方法 (レイアウト) を容易に変更できる
-    ![](./StartUpGuide/5-3-2_dashboard4.png)
+- 画面の表示方法 (レイアウト) を容易に変更できる
+  ![](./StartUpGuide/5-3-2_dashboard4.png)
 
-*   Azure ワークブックをダッシュボードにピン留めすることができる
-    ![](./StartUpGuide/5-3-2_dashboard5.png)
+- Azure ワークブックをダッシュボードにピン留めすることができる
+  ![](./StartUpGuide/5-3-2_dashboard5.png)
 
-*   分析グラフ以外にもリソースやソリューション ページ等よく使う項目のリンクとしても活用できる
-    ![](./StartUpGuide/5-3-2_dashboard6.png)
+- 分析グラフ以外にもリソースやソリューション ページ等よく使う項目のリンクとしても活用できる
+  ![](./StartUpGuide/5-3-2_dashboard6.png)
 
+- ダッシュボードは Azure ポータル上のポータル メニュー (画面左上の三本線アイコン) > [ダッシュボード] からアクセスできます。
+  ![](./StartUpGuide/5-3-2_dashboard7.png)
 
-*   ダッシュボードは Azure ポータル上のポータル メニュー (画面左上の三本線アイコン) > [ダッシュボード] からアクセスできます。
-    ![](./StartUpGuide/5-3-2_dashboard7.png)
-
-    ![](./StartUpGuide/5-3-2_dashboard8.png)
+  ![](./StartUpGuide/5-3-2_dashboard8.png)
 
 [Azure portal でダッシュボードを作成する - Azure portal | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-portal/azure-portal-dashboards)
 
@@ -1795,7 +1793,7 @@ AMPLS の基本的な概念や概要については、以下の公開情報を�
 **■ AMPLS を構成するとできること**
 例えば、次のような要件に対応できます。
 -  インターネットへの outbound を厳しく制限したまま、VM から Log Analytics にログを送信したい
-   > VNet 内の Private Endpoint 経由で Azure Monitor のエンドポイントへ到達できるため、監視データがパブリック インターネットを経由しない設計が可能です。
+   > VNet 内の PE 経由で Azure Monitor のエンドポイントへ到達できるため、監視データがパブリック インターネットを経由しない設計が可能です。
 -  特定のネットワークからのみ Log Analytics ワークスペースに対するクエリ（KQL）を許可したい
    >  AMPLS では、クエリ / インジェスト それぞれについて、アクセス モード (Open / PrivateOnly) を設計できます。
 
@@ -1847,5 +1845,5 @@ Azure Monitor エージェント (AMA) により送信されるゲスト OS メ�
 2.  [Azure Monitor リソースを AMPLS に接続します](https://learn.microsoft.com/ja-jp/azure/azure-monitor/fundamentals/private-link-configure?tabs=portal#connect-resources-to-the-ampls)。
 3.  [PE を作成し AMPLS に接続します](https://learn.microsoft.com/ja-jp/azure/azure-monitor/fundamentals/private-link-configure?tabs=portal#connect-ampls-to-a-private-endpoint)。
 
-PE の IP 割り当てを**静的**にすると、作成後に Private Endpoint 側へ割り当てる IP（＝プライベート DNS で解決される各エンドポイントの宛先）を増やせません。そのため、後から AMPLS にデータ収集エンドポイント (DCE) や Application Insights などのリソースを追加して到達先エンドポイントが増える場合、既存の Private Endpoint では対応できず作り直しが必要になります。将来的に追加で AMPLS にリソースを接続させる可能性がある場合は **動的**割り当てを推奨します。
+PE の IP 割り当てを**静的**にすると、作成後に PE 側へ割り当てる IP（＝プライベート DNS で解決される各エンドポイントの宛先）を増やせません。そのため、後から AMPLS にデータ収集エンドポイント (DCE) や Application Insights などのリソースを追加して到達先エンドポイントが増える場合、既存の PE では対応できず作り直しが必要になります。将来的に追加で AMPLS にリソースを接続させる可能性がある場合は **動的**割り当てを推奨します。
 ![](./StartUpGuide/6-3_pe.png)
