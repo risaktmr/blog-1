@@ -2,6 +2,7 @@
 title: Application Insights API キーの廃止と移行について
 date: 2026-04-24 00:00:00
 tags:
+  - Application Insights
   - HowTo
 ---
 
