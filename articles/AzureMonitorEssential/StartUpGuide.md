@@ -632,7 +632,7 @@ Azure Monitor には、各種 Azure サービスやリソースを監視する�
 ![](./StartUpGuide/4-7_servicehealth_portal.png)
 
 
-各イベントには一意の追跡 ID が付与されます。上記画面で各イベントのリンクをクリックすると、より詳細な情報を確認することができます。また、[サービス正常性アラート](https://learn.microsoft.com/ja-jp/azure/service-health/service-notifications)を設定すると、サービス正常性のイベントが発生した際に通知を受け取ることも可能です。サービス正常性アラートについては、本記事 [5.2.5 サービス正常性アラートとリソース正常性アラート](#5-2-5-サービス正常性アラートとリソース正常性アラート) をご参照ください。
+各イベントには一意の追跡 ID が付与されます。上記画面で各イベントのリンクをクリックすると、より詳細な情報を確認することができます。また、[サービス正常性アラート](https://learn.microsoft.com/ja-jp/azure/service-health/alerts-activity-log-service-notifications-portal)を設定すると、サービス正常性のイベントが発生した際に通知を受け取ることも可能です。サービス正常性アラートについては、本記事 [5.2.5 サービス正常性アラートとリソース正常性アラート](#5-2-5-サービス正常性アラートとリソース正常性アラート) をご参照ください。
 ![](./StartUpGuide/4-7_servicehealth_serviceissue.png)
 
 
@@ -780,7 +780,7 @@ AMA と DCR を使用してログ収集を行う場合、収集するデータ �
 
 [Azure Monitor エージェントのネットワーク構成 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-network-configuration?tabs=PowerShellWindows)
 [Azure Monitor エージェントでサポートされるオペレーティング システム - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-supported-operating-systems)
-[Azure Monitor エージェントの要件 | ディスク領域 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-requirements#disk-spaces)
+[Azure Monitor エージェントの要件 - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-requirements#disk-spaces)
 
 
 前提条件が確認できたら、次に DCR の作成を行います。
@@ -1264,7 +1264,9 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 
 アクティビティ ログ アラートの設定手順などは、以下の公開情報やブログをご参照ください。
 [アクティビティ ログ、サービス正常性、またはリソース正常性の警告ルールを作成する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-create-activity-log-alert-rule?tabs=activity-log)
-[Azure Monitor のアラートに関するよくあるご質問 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/AzureMonitorEssential/MonitorAlertFAQ/#%E3%83%AD%E3%82%B0-%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88-%E3%83%AB%E3%83%BC%E3%83%AB)
+[Azure Monitor でアクション グループを作成および管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups)
+[Azure Monitor のアラートに関するよくあるご質問 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/AzureMonitorEssential/MonitorAlertFAQ/#%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%93%E3%83%86%E3%82%A3-%E3%83%AD%E3%82%B0-%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%EF%BC%88%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9%E6%AD%A3%E5%B8%B8%E6%80%A7%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E3%80%81%E3%83%AA%E3%82%BD%E3%83%BC%E3%82%B9%E6%AD%A3%E5%B8%B8%E6%80%A7%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%E3%80%81%E3%82%A2%E3%82%AF%E3%83%86%E3%82%A3%E3%83%93%E3%83%86%E3%82%A3-%E3%83%AD%E3%82%B0-%E3%82%A2%E3%83%A9%E3%83%BC%E3%83%88%EF%BC%89)
+
 
 <br><!-- 小項目の終わり <br> を追加する -->
 
@@ -1297,6 +1299,7 @@ Log Analytics ワークスペースに収集されたログに加え、Azure Res
 
 サービス正常性アラートの設定手順などは、以下の公開情報やブログをご参照ください。
 [Azure ポータル で Azure サービス通知の Service Health アラートを作成する - Azure Service Health | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/service-health/alerts-activity-log-service-notifications-portal)
+[Azure Monitor でアクション グループを作成および管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups)
 [サービス正常性アラートの設定手順と推奨設定について | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/ame/HowToSetUpServiceHealthAlertsAndRecommendedSettings/)
 
 <br>
@@ -1414,19 +1417,16 @@ Log Analytics のコスト分析の詳細は、以下の公開情報をご参照
 **■ Azure Data Explorer を使う方法** <a id="azure-data-explorer"></a>
 以下に Azure Data Explorer に BLOB を取り込んで、クエリする方法を簡単にご紹介します。
 
-1. クラスターを作成します。
+1. 以下の公開情報の手順に沿ってクラスターとデータ ベースを作成します。
 [クイック スタート: Azure Data Explorer クラスターとデータベースを作成する - Azure Data Explorer | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/data-explorer/create-cluster-and-database?tabs=free#create-a-cluster)
 
-2. データベースを作成します。
-[クイック スタート: Azure Data Explorer クラスターとデータベースを作成する - Azure Data Explorer | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/data-explorer/create-cluster-and-database?tabs=free#create-a-database)
-
-3. Azure Data Explorer のクラスターに [Azure Data Explorer](https://dataexplorer.azure.com/) または下図の ADX の [概要] の [URI] からアクセスします。
+2. Azure Data Explorer のクラスターに [Azure Data Explorer](https://dataexplorer.azure.com/) または下図の ADX の [概要] の [URI] からアクセスします。
 ![](./StartUpGuide/5-2-7_0_adx_url.png)
 
-4. クエリを実行したいファイルがあるコンテナーからログを取り込みます。
+3. クエリを実行したいファイルがあるコンテナーからログを取り込みます。
 [Azure Storage からデータを取得する - Azure Data Explorer | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/data-explorer/get-data-storage)
 
-5. 4 で作成したテーブルに対して、下図のように Log Analytics ワークスペースと同じクエリでデータを参照できます。
+4. 3 で作成したテーブルに対して、下図のように Log Analytics ワークスペースと同じクエリでデータを参照できます。
     ※ Azure Data Explorer のクエリ結果（テーブル名は手順 4 にて設定できます）
     ![](./StartUpGuide/5-2-7_1_adx_query.png)
 
