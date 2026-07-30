@@ -1426,7 +1426,7 @@ Log Analytics のコスト分析の詳細は、以下の公開情報をご参照
 [Azure Storage からデータを取得する - Azure Data Explorer | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/data-explorer/get-data-storage)
 
 4. 3 で作成したテーブルに対して、下図のように Log Analytics ワークスペースと同じクエリでデータを参照できます。
-    ※ Azure Data Explorer のクエリ結果（テーブル名は手順 4 にて設定できます）
+    ※ Azure Data Explorer のクエリ結果（テーブル名は手順 3 にて設定できます）
     ![](./StartUpGuide/5-2-7_1_adx_query.png)
 
     ※ Log Analytics ワークスペースのクエリ結果
