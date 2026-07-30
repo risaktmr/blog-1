@@ -17,8 +17,6 @@ tags:
   - [2.1 リタイア済み製品](#2-1-リタイア済み製品)
   - [2.2 リタイア予定の製品](#2-2-リタイア予定の製品)
 - [3. 概念](#3-概念)
-  - [3.1 アーキテクチャ](#3-1-アーキテクチャ)
-  - [3.2 データの流れ](#3-2-データの流れ)
 - [4. 監視シナリオ例](#4-監視シナリオ例)
   - [4.1 仮想マシンの死活監視](#4-1-仮想マシンの死活監視)
   - [4.2 仮想マシン ホストのパフォーマンス監視](#4-2-仮想マシン-ホストのパフォーマンス監視)
@@ -52,10 +50,9 @@ tags:
     - [5.3.3 メトリック エクスプローラー](#5-3-3-メトリック-エクスプローラー)
     - [5.3.4 Application Insights の可視化](#5-3-4-Application-Insights-の可視化)
 - [6. セキュリティ](#6-セキュリティ)
-  - [6.1 データ保護](#6-1-データ保護)
+  - [6.1 Azure Monitor Private Link Scope (AMPLS)](#6-1-Azure-Monitor-Private-Link-Scope-AMPLS)
   - [6.2 データ削除](#6-2-データ削除)
-  - [6.3 Azure Monitor Private Link Scope (AMPLS)](#6-3-Azure-Monitor-Private-Link-Scope-AMPLS)
-
+  
 
 <br>
 
@@ -417,28 +414,18 @@ Azure サブスクリプション内の管理操作やサービス正常性イ�
 
 <!-- 大項目 -->
 ## 3. 概念
-本項目の説明
-
-<br>
-
-
-### 3.1 アーキテクチャ
-本文を入力
+ここでは Azure Monitor のソリューション間の関係とデータの流れの概念図を記載します。
+図の矢印はデータの流れを示します。
+![](./StartUpGuide/3_conceptDiagram.png)
 
 <br><!-- 小項目の終わり <br> を追加する -->
-
-
-### 3.2 データの流れ
-本文を入力
-
-<br><!-- 小項目の終わり <br> を追加する -->
-<br><!-- 大項目の終わり <br> を追加する -->
-
-
+<br><!-- 2章終わり--大項目の終わり <br> を追加する -->
 
 <!-- 大項目 -->
 ## 4. 監視シナリオ例
-本項目の説明
+まずは仮想マシンを例に、Azure Monitor での監視方法について記載します。
+どのようなデータを利用し、どのような監視を実現することができるか、具体的な例も示しながらご紹介します。
+この章を読むことで、Azure Monitor の基本的な監視構成を知ることができます。
 
 <br>
 
@@ -664,10 +651,13 @@ Azure Monitor には、各種 Azure サービスやリソースを監視する�
 
 <!-- 大項目 -->
 ## 5. 各機能とソリューション
-本項目の説明
+ここでは、Azure Monitor の代表的な機能やソリューションについて記載します。
+本章を読むことで、監視データの取得、分析、可視化の方法と作業の流れを知ることができます。
+
+<br>
 
 ### 5.1 データ収集
-本項目の説明
+本項では、監視に利用するデータの種類とその取得方法をご紹介します。
 
 <br>
 
@@ -1144,6 +1134,8 @@ Network Watcher の機能の一つであるネットワークの分析情報は�
 
 <!-- 中項目 -->
 ### 5.2 分析とレポート
+本項では、取得した監視データの利用方法をご紹介します。
+
 #### 5.2.1 Log Analytics ワークスペースのクエリ  
 各種の Azure リソースやマシンから Log Analytics ワークスペースに収集したデータはクエリを実行して確認します。
 
@@ -1404,14 +1396,6 @@ Event
 | summarize count(), BillableDataMB =sum(_BilledSize) / 1000 / 1000 by EventID, bin(TimeGenerated, 1d)
 ~~~
 
-以下は Perf テーブルの過去 30 日間のパフォーマンス オブジェクトごとの課金対象データ量（MB）を集計する例です。
-~~~
-Perf
-| where TimeGenerated > startofday(ago(31d)) and TimeGenerated < startofday(now()) 
-| where _IsBillable == true
-| summarize count(), BillableDataMB =sum(_BilledSize) / 1000 / 1000 by ObjectName
-~~~
-
 Log Analytics のコスト分析の詳細は、以下の公開情報をご参照ください。 
 [Azure Monitor の Log Analytics ワークスペースでの使用量を分析します - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/analyze-usage#querying-data-volumes-from-the-usage-table)
 
@@ -1532,7 +1516,7 @@ Application Insights の [ログ] からクエリを実行すると、対象の 
 
 <!-- 中項目 -->
 ### 5.3 可視化
-本項目の説明
+本項では、取得データを可視化する方法についてご紹介します。
 
 <br>
 
@@ -1739,45 +1723,18 @@ Application Insights に収集されたデータは、クエリを利用しな�
 <br><!-- 大項目の終わり <br> を追加する -->
 
 
-
 <!-- 大項目 -->
 ## 6. セキュリティ
-本項目の説明
+本章では Azure Monitor のセキュリティ機能に関してご紹介します。
+すべてのセキュリティ設定を網羅するのではなく、利用者様が疑問を持ちやすく、よくお問い合わせをいただく項目に絞ってご紹介します。
 
-<br>
+Azure Monitor では、サービス側のセキュリティ対策として、既定でログの送信やクエリなどの転送中のデータが TLS 1.2 以降で保護され、保存されるすべてのデータとクエリは Microsoft マネージド キーで暗号化されます。
+また、Microsoft Entra ID による認証や Azure RBAC によるアクセス制御が提供されています。
+パブリック エンドポイントへの接続についてもエンドツーエンドで暗号化されるため、後述の Azure Monitor Private Link Scope (AMPLS) を構成しない場合にも、通信や保存データは暗号化されますのでご安心ください。
 
+<br><!-- 大項目の終わり <br> を追加する -->
 
-### 6.1 データ保護
-本文を入力
-
-<br><!-- 中項目の終わり <br> を追加する -->
-
-
-### 6.2 データ削除
-Log Analytics ワークスペースのログは、保持期間を超えると自動的に削除されます。
-一方、保持期間を迎える前にログを削除する場合は、[REST API](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/personal-data-mgmt) を利用いただく必要がございます (Azure ポータルから手動でログを削除することはできません)。ログを削除するための REST API は用途の異なる 2 種類があり、目的に応じて使い分けていただく必要があります。
-
-
-**■ Purge API**
-Log Analytics ワークスペースから対象データを完全に削除します。このため、[GDPR（EU 一般データ保護規則）](https://learn.microsoft.com/ja-jp/compliance/regulatory/gdpr)に準拠しています。
-[Workspace Purge - Purge - REST API (Azure Log Analytics) | Microsoft Learn](https://learn.microsoft.com/ja-jp/rest/api/loganalytics/workspace-purge/purge?view=rest-loganalytics-2025-07-01&tabs=HTTP)
-
-
-**■ Delete Data API**
-対象データを削除済みとしてマークし、物理的にデータを削除しません。このため、GDPR に準拠していません。
-[Log Analytics ワークスペースのデータを削除する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/delete-log-data?tabs=api)
-
-
-GDPR の要件に準拠する必要がある場合は Purge API、それ以外の場合は基本的に Delete Data API をご利用ください。
-REST API の実行手順や前提条件は、以下の公開情報やブログをご参照ください。
-[Azure Monitor ログで個人データを管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/personal-data-mgmt)
-[Log Analytics ワークスペースのデータを削除する方法 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/LogAnalyticsWorkspacePurge/)
-
-
-<br><!-- 中項目の終わり <br> を追加する -->
-
-
-### 6.3 Azure Monitor Private Link Scope (AMPLS)
+### 6.1 Azure Monitor Private Link Scope (AMPLS)
 **1. AMPLS の概要**
 AMPLS（Azure Monitor Private Link）を構成することで、Azure Monitor（Log Analytics や Application Insights など）への通信をパブリック インターネットを経由せず、プライベート ネットワーク経由で行うことが可能になります。
 
@@ -1847,3 +1804,28 @@ Azure Monitor エージェント (AMA) により送信されるゲスト OS メ�
 
 PE の IP 割り当てを**静的**にすると、作成後に PE 側へ割り当てる IP（＝プライベート DNS で解決される各エンドポイントの宛先）を増やせません。そのため、後から AMPLS にデータ収集エンドポイント (DCE) や Application Insights などのリソースを追加して到達先エンドポイントが増える場合、既存の PE では対応できず作り直しが必要になります。将来的に追加で AMPLS にリソースを接続させる可能性がある場合は **動的**割り当てを推奨します。
 ![](./StartUpGuide/6-3_pe.png)
+
+
+<br><!-- 中項目の終わり <br> を追加する -->
+
+### 6.2 データ削除
+Log Analytics ワークスペースのログは、保持期間を超えると自動的に削除されます。
+一方、保持期間を迎える前にログを削除する場合は、[REST API](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/personal-data-mgmt) を利用いただく必要がございます (Azure ポータルから手動でログを削除することはできません)。ログを削除するための REST API は用途の異なる 2 種類があり、目的に応じて使い分けていただく必要があります。
+
+
+**■ Purge API**
+Log Analytics ワークスペースから対象データを完全に削除します。このため、[GDPR（EU 一般データ保護規則）](https://learn.microsoft.com/ja-jp/compliance/regulatory/gdpr)に準拠しています。
+[Workspace Purge - Purge - REST API (Azure Log Analytics) | Microsoft Learn](https://learn.microsoft.com/ja-jp/rest/api/loganalytics/workspace-purge/purge?view=rest-loganalytics-2025-07-01&tabs=HTTP)
+
+
+**■ Delete Data API**
+対象データを削除済みとしてマークし、物理的にデータを削除しません。このため、GDPR に準拠していません。
+[Log Analytics ワークスペースのデータを削除する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/delete-log-data?tabs=api)
+
+
+GDPR の要件に準拠する必要がある場合は Purge API、それ以外の場合は基本的に Delete Data API をご利用ください。
+REST API の実行手順や前提条件は、以下の公開情報やブログをご参照ください。
+[Azure Monitor ログで個人データを管理する - Azure Monitor | Microsoft Learn](https://learn.microsoft.com/ja-jp/azure/azure-monitor/logs/personal-data-mgmt)
+[Log Analytics ワークスペースのデータを削除する方法 | Japan Azure Monitoring Support Blog](https://jpazmon-integ.github.io/blog/LogAnalytics/LogAnalyticsWorkspacePurge/)
+
+<br><!-- 中項目の終わり <br> を追加する -->
