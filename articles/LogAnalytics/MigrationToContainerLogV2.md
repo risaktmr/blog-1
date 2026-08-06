@@ -42,15 +42,15 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insig
 
 ## 2. 移行の前にご確認ください
 ### 2-1. レガシ認証の使用有無
-シナリオごとの移行方法の前に、まずは Container Insights における認証方法として現在何が使用されているかを確認いただく必要がございます。
-Container Insights の認証方法としては、証明書ベースのローカル認証であるレガシ認証と、マネージド ID 認証の 2 種類がございます。
-レガシ認証を使用している場合、レガシ認証も ContainerLog テーブルと同じ 2026 年 9 月 30 日をもってサポートがされなくなります。
+シナリオごとの移行方法の前に、まずは Container Insights における認証方法として現在何が使用されているかを確認いただく必要がございます。  
+Container Insights の認証方法としては、証明書ベースのローカル認証であるレガシ認証と、マネージド ID 認証の 2 種類がございます。  
+レガシ認証を使用している場合、レガシ認証も ContainerLog テーブルと同じ 2026 年 9 月 30 日をもってサポートがされなくなります。  
 - Azure の更新情報  
 https://azure.microsoft.com/ja-jp/updates/?id=500853
 ![](./MigrationToContainerLogV2/announce02.png)
 
-そのため、レガシ認証を使用している場合には、まずマネージド ID 認証に移行する必要があります。
-(後述いたしますマネージド ID 認証への移行をいただくだけで、ContainerLogV2 テーブルへの移行も完了します。)
+そのため、レガシ認証を使用している場合には、まずマネージド ID 認証に移行する必要があります。  
+(後述いたしますマネージド ID 認証への移行をいただくだけで、ContainerLogV2 テーブルへの移行も完了します。)  
 
 レガシ認証を使用しているクラスターは、Azure Resource Graph のクエリを用いて以下の手順で調べることができます。  
 
@@ -64,7 +64,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insig
 1. Azure ポータルの検索バーにて、"Resource Graph エクスプローラー" と検索し、サービス項目にある [Resource Graph エクスプローラー] をクリックします。<br>
 ![](./MigrationToContainerLogV2/resourcegraph01.png)
 
-2. 以下のクエリを張り付け、画面上部にあります [実行] をクリックします。
+2. 以下のクエリを貼り付け、画面上部にあります [実行] をクリックします。
 ```
 resources        
 | where type =~ 'Microsoft.ContainerService/managedClusters'       
@@ -88,8 +88,8 @@ resources
 ![](./MigrationToContainerLogV2/chart.png)
 
 ### 2-3. 移行に伴う注意点
-ログの格納先が ContainerLog テーブルから ContainerLogV2 テーブルに変更されても、ログ アラート ルールやダッシュボードなど ContainerLog テーブルのデータを活用するサービスで用いるクエリは自動で変更されません。
-ContainerLog テーブルを検索しているクエリがある場合には、お客様ご自身で ContainerLogV2 テーブルをクエリするよう変更いただく必要がございます。
+ログの格納先が ContainerLog テーブルから ContainerLogV2 テーブルに変更されても、ログ アラート ルールやダッシュボードなど ContainerLog テーブルのデータを活用するサービスで用いるクエリは自動で変更されません。  
+ContainerLog テーブルを検索しているクエリがある場合には、お客様ご自身で ContainerLogV2 テーブルをクエリするよう変更いただく必要がございます。  
 
 例えば、ContainerLog テーブルに対してクエリを行っているアラート ルールが存在するかどうかは、
 以下の Azure Resource Graph クエリでご確認いただけます。
@@ -113,7 +113,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insig
 また、移行が完了してから ContainerLogV2 テーブルにログが格納されるようになるまで、10 分程度お時間がかかります。
 
 ## 3. レガシ認証を使用した Container Insights の場合の移行方法
-レガシ認証からマネージド ID 認証に移行する過程で、ContainerLog テーブルから ContainerLogV2 テーブルへの移行も行われます。
+レガシ認証からマネージド ID 認証に移行する過程で、ContainerLog テーブルから ContainerLogV2 テーブルへの移行も行われます。  
 そのため、レガシ認証からマネージド ID 認証への移行のみを実施いただければ十分でございます。
 
 ### 移行手順
@@ -129,7 +129,8 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insig
 https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insights-authentication?tabs=cli#what-happens-when-i-migrate-to-managed-identity-authentication
 
 ## 4. マネージド ID 認証を使用した Container Insights の場合の移行方法
-すでに移行対象のクラスターでマネージド ID 認証を使用している場合には、ConfigMap で ContainerLogV2 テーブルにログを送るような設定を行うまたはログ プロファイルの設定で ContainerLogV2 テーブルにログを送るような設定を行うことで移行がいただけます。(*)
+すでに移行対象のクラスターでマネージド ID 認証を使用している場合には、ConfigMap で ContainerLogV2 テーブルにログを送るような設定を行う、
+またはログ プロファイルの設定で ContainerLogV2 テーブルにログを送るような設定を行うことで移行がいただけます。(*)
 
 (*)
 ContainerLog テーブルにログが格納される条件は、以下 2 つを両方とも満たす場合でございます。
@@ -195,5 +196,5 @@ ConfigMap を有効化いただくと、既定で ContainerLogV2 テーブルに
 https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable?tabs=azure-portal#enable-container-insights-and-logging-on-an-aks-cluster
 
 ## 5. まとめ
-2026 年 9 月 30 日に ContainerLog テーブルの使用のサポートが終了するに際し、後継の ContainerLogV2 テーブルへ移行する方法を紹介いたしました。
+2026 年 9 月 30 日に ContainerLog テーブルの使用のサポートが終了するに際し、AKS 環境にて後継の ContainerLogV2 テーブルへ移行する方法を紹介いたしました。  
 本記事が、少しでも移行を検討される際にお役に立てれば幸いです。
