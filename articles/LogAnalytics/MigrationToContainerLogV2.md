@@ -38,7 +38,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insig
 ![](./MigrationToContainerLogV2/announce01.png)
   
 サポート終了に伴い、ContainerLog テーブルをご利用いただいている場合には後継の ContainerLogV2 テーブルへ移行をいただく必要がございます。  
-本記事では、Azure Kubernetes Service (AKS) リソースでご利用されていることを前提として移行方法についていくつか具体的なシナリオを挙げて紹介いたします。
+本記事では、Azure Kubernetes Service (AKS) リソースで利用されていることを前提とした移行方法について、いくつか具体的なシナリオを挙げて紹介いたします。
 
 ## 2. 移行の前にご確認ください
 ### 2-1. レガシ認証の使用有無
