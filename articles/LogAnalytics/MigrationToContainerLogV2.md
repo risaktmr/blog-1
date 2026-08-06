@@ -1,6 +1,6 @@
 ---
 title: ContainerLog テーブルのサポート終了に伴う ContainerLogV2 テーブルへの移行について
-date: 2026-08-07 00:00:00
+date: 2026-08-06 00:00:00
 
 tags:
  - Log Analytics
@@ -8,7 +8,7 @@ tags:
  - Retirement
 
 [更新履歴]
-- 2026/08/07 ブログ公開
+- 2026/08/06 ブログ公開
 
 こんにちは！Azure Monitoring チームの佐藤です。
 
@@ -38,7 +38,7 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insig
 ![](./MigrationToContainerLogV2/announce01.png)
   
 サポート終了に伴い、ContainerLog テーブルをご利用いただいている場合には後継の ContainerLogV2 テーブルへ移行をいただく必要がございます。  
-本記事では、移行方法についていくつか具体的なシナリオを挙げて紹介いたします。
+本記事では、Azure Kubernetes Service (AKS) リソースでご利用されていることを前提として移行方法についていくつか具体的なシナリオを挙げて紹介いたします。
 
 ## 2. 移行の前にご確認ください
 ### 2-1. レガシ認証の使用有無
@@ -94,7 +94,7 @@ ContainerLog テーブルを検索しているクエリがある場合には、�
 例えば、ContainerLog テーブルに対してクエリを行っているアラート ルールが存在するかどうかは、
 以下の Azure Resource Graph クエリでご確認いただけます。
 
-Azure Resource Graph クエリの使用方法は、前述の []"2-1. レガシ認証の使用有無 " 内、"レガシ認証を使用しているクラスターの検索手順"](https://github.com/risaakita/blog-1/blob/main/articles/LogAnalytics/MigrationToContainerLogV2.md#2-1-%E3%83%AC%E3%82%AC%E3%82%B7%E8%AA%8D%E8%A8%BC%E3%81%AE%E4%BD%BF%E7%94%A8%E6%9C%89%E7%84%A1) に記載しております。  
+Azure Resource Graph クエリの使用方法は、前述の ["2-1. レガシ認証の使用有無 " 内、"レガシ認証を使用しているクラスターの検索手順"](https://github.com/risaakita/blog-1/blob/main/articles/LogAnalytics/MigrationToContainerLogV2.md#2-1-%E3%83%AC%E3%82%AC%E3%82%B7%E8%AA%8D%E8%A8%BC%E3%81%AE%E4%BD%BF%E7%94%A8%E6%9C%89%E7%84%A1) に記載しております。  
 ```
 resources
 | where type in~ ('microsoft.insights/scheduledqueryrules') and ['kind'] !in~ ('LogToMetric')
@@ -115,11 +115,6 @@ https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/container-insig
 ## 3. レガシ認証を使用した Container Insights の場合の移行方法
 レガシ認証からマネージド ID 認証に移行する過程で、ContainerLog テーブルから ContainerLogV2 テーブルへの移行も行われます。
 そのため、レガシ認証からマネージド ID 認証への移行のみを実施いただければ十分でございます。
-
-### 必要な Azure 組み込みロール
-移行の過程で Container Insights の無効化 / 有効化操作を行うため、少なくともクラスターへの共同作成者権限が必要でございます。
-- Azure Kubernetes Service (AKS) クラスターの監視を有効にする > 前提条件  
-https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable?tabs=azure-cli#prerequisites
 
 ### 移行手順
 Azure CLI (バージョン 2.49.0 以上) で移行いただけます。  
@@ -149,13 +144,6 @@ ConfigMap では、パラメーター containerlog_schema_version を使用し�
 - ConfigMap の設定  
 https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-data-collection-configmap#configmap-settings
 
-#### 必要な Azure 組み込みロール
-- [Azure Kubernetes Service クラスター ユーザー ロール](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/containers#azure-kubernetes-service-cluster-user-role)
-- [Azure Kubernetes Service RBAC ライター](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/containers#azure-kubernetes-service-rbac-writer)
-
-Azure Kubernetes Service クラスター ユーザー ロールは、AKS クラスターのユーザー用 kubeconfig を取得するために必要です。  
-一方で、このロール単独では ConfigMap などの　Kubernetes リソースを操作する権限がないため、ConfigMap 更新のため Azure Kubernetes Service RBAC ライター権限が必要となります。
-
 #### 移行手順
 1. まず、ConfigMap が利用されていること、およびパラメーター container_schema_version の値を確認します。
 ```
@@ -175,12 +163,6 @@ kubectl apply -f container-azm-ms-agentconfig.yaml
 ```
 
 ### 4-2. ConfigMap を有効化することにより移行する
-#### 必要な Azure 組み込みロール
-- [Azure Kubernetes Service クラスター ユーザー ロール](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/containers#azure-kubernetes-service-cluster-user-role)
-- [Azure Kubernetes Service RBAC ライター](https://learn.microsoft.com/ja-jp/azure/role-based-access-control/built-in-roles/containers#azure-kubernetes-service-rbac-writer)
-
-Azure Kubernetes Service クラスター ユーザー ロールは、AKS クラスターのユーザー用 kubeconfig を取得するために必要です。  
-一方で、このロール単独では ConfigMap などの　Kubernetes リソースを操作する権限がないため、ConfigMap 作成のため Azure Kubernetes Service RBAC ライター権限が必要となります。
 
 #### 移行手順
 ConfigMap を有効化することで ContainerLogV2 テーブルに移行する場合の手順は、以下の公開情報に記載しております。
@@ -191,10 +173,6 @@ ConfigMap を有効化いただくと、既定で ContainerLogV2 テーブルに
 
 
 ### 4-3. ログ プロファイルを設定することにより移行する
-#### 必要な Azure 組み込みロール
-少なくともクラスターへの共同作成者権限が必要でございます。
-- Azure Kubernetes Service (AKS) クラスターの監視を有効にする > 前提条件  
-https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable?tabs=azure-cli#prerequisites
 
 #### 移行手順
 1. Azure ポータルにて、ContainerLogV2 テーブルへの移行を行う AKS リソースを開きます。
