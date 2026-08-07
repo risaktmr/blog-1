@@ -1,6 +1,6 @@
 ---
 title: ContainerLog テーブルのサポート終了に伴う ContainerLogV2 テーブルへの移行について
-date: 2026-08-06 00:00:00
+date: 2026-08-07 00:00:00
 
 tags:
  - Log Analytics
@@ -174,6 +174,10 @@ ConfigMap を有効化いただくと、既定で ContainerLogV2 テーブルに
 
 
 ### 4-3. ログ プロファイルを設定することにより移行する
+#### 必要な Azure 組み込みロール
+少なくともクラスターへの共同作成者権限が必要でございます。
+- Azure Kubernetes Service (AKS) クラスターの監視を有効にする > 前提条件  
+https://learn.microsoft.com/ja-jp/azure/azure-monitor/containers/kubernetes-monitoring-enable?tabs=azure-cli#prerequisites
 
 #### 移行手順
 1. Azure ポータルにて、ContainerLogV2 テーブルへの移行を行う AKS リソースを開きます。
