@@ -1,6 +1,6 @@
 ---
 title: ログのメトリック アラートについて
-date: 2026-09-07
+date: 2026-09-11
 tags:
   - Azure Monitor Essential
   - Alerts, Action Groups
@@ -9,7 +9,7 @@ tags:
 ---
 
 [更新履歴]
-- 2026/08/31 ブログ公開
+- 2026/09/11 ブログ公開
 
 こんにちは、Azure Monitoring サポート チームの北村です。
 Azure Monitor のアラート ルールの一つに「ログのメトリック アラート」というアラートが存在することをご存知でしょうか。
@@ -28,7 +28,7 @@ Azure Monitor のアラート ルールの一つに「ログのメトリック �
 - [5. ログのメトリック アラートに関するよくあるご質問](#5-ログのメトリック-アラートに関するよくあるご質問)
   - [Q. Heartbeat メトリックを監視するアラートを作成したところ、メトリック アラートとログ アラート ルールが同時に作成されました。ログ アラート ルールは削除してもいいですか。](#Q-Heartbeat-メトリックを監視するアラートを作成したところ、メトリック-アラートとログ-アラート-ルールが同時に作成されました。ログ-アラート-ルールは削除してもいいですか。)
   - [Q. メトリックに変換する scheduledQueryRules がアラート ルールの一覧に表示されません。](#Q-メトリックに変換する-scheduledQueryRules-がアラート-ルールの一覧に表示されません。)
-  - [Q. Azure ポータル上でメトリックに変換する scheduledQueryRules を表示したところ、Cannot read properties of undefined (reading 'toLowerCase') と表示されます。](#Q-Azure-ポータル上でメトリックに変換する-scheduledQueryRules-を表示したところ、Cannot-read-properties-of-undefined-reading-toLowerCase-と表示されます。)
+  - [Q. Azure ポータル上でメトリックに変換する scheduledQueryRules を表示したところ、Cannot read properties of undefined (reading ‘toLowerCase’) と表示されます。](#Q-Azure-ポータル上でメトリックに変換する-scheduledQueryRules-を表示したところ、Cannot-read-properties-of-undefined-reading-‘toLowerCase’-と表示されます。)
   - [Q. Heartbeat メトリックが生成されていることを確認する方法はありますか。](#Q-Heartbeat-メトリックが生成されていることを確認する方法はありますか。)
 
 <br>
@@ -37,7 +37,7 @@ Azure Monitor のアラート ルールの一つに「ログのメトリック �
 ## 1. ログのメトリック アラートとは
 **[ログのメトリック アラート](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-metric-logs)** は、[Azure Monitor エージェント (AMA)](https://learn.microsoft.com/ja-jp/azure/azure-monitor/agents/azure-monitor-agent-overview) によって Log Analytics のエンドポイントに送信された Heartbeat や Perf などのログをメトリックに変換し、変換後の**メトリック**を監視するアラート ルールです。
 
-これに対して、**[ログ アラート ルール（ログ検索アラート ルール）](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-create-log-alert-rule)** は、Log Analytics ワークスペースに収集された**ログ**そのものを KQL クエリで監視するアラート ルールです。
+これに対して、**[ログ アラート ルール](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-create-log-alert-rule)** は、Log Analytics ワークスペースに収集された**ログ**そのものを KQL クエリで監視するアラート ルールです。
 
 両者は、元となるデータが Log Analytics のエンドポイントに送信されたログである点は共通していますが、実際の監視対象（ログ アラート ルールはログそのもの、ログのメトリック アラートは変換後のメトリック）が異なります。
 
@@ -47,10 +47,10 @@ Azure Monitor のアラート ルールの一つに「ログのメトリック �
 ![](./LogToMetricAlert/image01.png)
 
 
-なお、ログのメトリック アラートで監視可能なデータは、[公開情報](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/microsoft-operationalinsights-workspaces-metrics#category-legacy-log-based-metrics) の「Category: Legacy Log-based metrics」に記載されているメトリックに限られますので、ご留意ください。
+なお、ログのメトリック アラートで監視可能なデータは、[公開情報](https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/microsoft-operationalinsights-workspaces-metrics#category-legacy-log-based-metrics) の「Category: Legacy Log-based metrics」に記載されているメトリックのみです。アラートを作成する前に、監視したいログに対応するメトリック名とディメンションが一覧に含まれていることをご確認ください。
 
 > [!NOTE]
-> Azure Monitor エージェント (AMA) では、[パフォーマンス カウンターを直接メトリックとして収集することが可能です](https://learn.microsoft.com/ja-jp/azure/azure-monitor/vm/data-collection-performance#add-destination)。そのため、ログのメトリック アラートではなく、通常のメトリック アラート ルールでも同様の内容を監視することができます。なお、この方法で収集できるのはパフォーマンス カウンターのみとなり、Heartbeat は対象外となりますのでご注意ください。
+> **Azure Monitor エージェント (AMA) では、[パフォーマンス カウンターを直接メトリックとして収集することが可能です](https://learn.microsoft.com/ja-jp/azure/azure-monitor/vm/data-collection-performance#add-destination)**。そのため、ログのメトリック アラートではなく、通常のメトリック アラート ルールでも監視することができます。なお、この方法で収集できるのはパフォーマンス カウンターのみとなり、Heartbeat は対象外となりますのでご注意ください。
 
 
 <br>
@@ -124,7 +124,6 @@ Azure ポータル > [モニター (監視)] > [アラート] を開き、画面
 
 次の画面では、アラートの発報条件を指定します。
 シグナル名では [Heartbeat] を選択し、メトリック アラートの評価に関わる項目を設定します。
-マシンごとに監視するため、ディメンションで [Computer] を指定します。
 
 - 確認する間隔 : 評価を行う頻度
 - ルックバック期間 : 1 回の評価を行う際に評価の対象となる期間
@@ -134,6 +133,7 @@ Azure ポータル > [モニター (監視)] > [アラート] を開き、画面
 
 
 今回は、以下のとおり設定します。
+マシンごとに監視するため、ディメンションでは [Computer] を指定します。
 
 - シグナル名 : Heartbeat
 - しきい値の種類 : Static
@@ -162,7 +162,7 @@ Azure Monitor のアラート機能では、[アクション グループ](https
 <img width="600" src="../LogToMetricAlert/image09.png">
 
 > [!NOTE]
-> アクション グループの概要や設定手順につきましては、[弊社公開情報](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#create-an-action-group-in-the-azure-portal)をご覧ください。
+> アクション グループの概要や設定手順につきましては、[公開情報](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/action-groups#create-an-action-group-in-the-azure-portal)をご覧ください。
 
 <br>
 
@@ -170,7 +170,7 @@ Azure Monitor のアラート機能では、[アクション グループ](https
 [アラート ルールの詳細] では、重大度、アラート ルール名、アラート ルールの説明を設定します。
 [詳細設定オプション] では、アラート ルールの有効化や自動解決を設定します。
 
-[アラートを自動的に解決する] にチェックを入れた場合には、しきい値を満たした時点で一度発報し、条件が解消されるまで再度発報しません。このアラートは、[ステートフルなアラート](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-overview#stateful-alerts)と呼ばれます。メトリック アラートの場合は、3 回連続でしきい値を満たさなかった場合に解決したことが通知されます。
+[アラートを自動的に解決する] にチェックを入れると、[ステートフルなアラート](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-overview#stateful-alerts) として動作します。条件を満たすと発報し、条件が解消されるまでは同じ時系列に対して新たなアラートは発報されません。メトリック アラートでは、条件を満たさない評価が 3 回連続すると解決済みに移行し、解決通知が行われます。
 
 [アラートを自動的に解決する] でチェックしない場合は、[ステートレスなアラート](https://learn.microsoft.com/ja-jp/azure/azure-monitor/alerts/alerts-overview#stateless-alerts)となり、しきい値を満たす度に発報します。この場合、アラートが解決したとみなされることはないため、解決した旨の通知も行われません。
 
@@ -197,8 +197,8 @@ Azure Monitor のアラート機能では、[アクション グループ](https
 
 
 #### Q. Heartbeat メトリックを監視するアラートを作成したところ、メトリック アラートとログ アラート ルールが同時に作成されました。ログ アラート ルールは削除してもいいですか。
-いいえ、ログ アラート ルール (`scheduledQueryRules`) は削除しないでください。
-作成されたメトリック アラートは、AMA によって収集されたログをメトリックに変換し、メトリックを評価する「ログのメトリック アラート」です。Azure ポータルからログのメトリック アラートを作成した場合、ログをメトリックに変換するための `scheduledQueryRules` が自動で作成されますが、削除するとメトリックが生成されなるため、監視できません。
+いいえ、ログをメトリックに変換する `scheduledQueryRules` は削除しないでください。
+作成されたメトリック アラートは、AMA によって収集されたログをメトリックに変換し、メトリックを評価する「ログのメトリック アラート」です。Azure ポータルからログのメトリック アラートを作成した場合、ログをメトリックに変換するための `scheduledQueryRules` が自動で作成されますが、削除するとメトリックが生成されなくなるため、監視できません。
 <br>
 
 #### Q. メトリックに変換する scheduledQueryRules がアラート ルールの一覧に表示されません。
@@ -219,8 +219,8 @@ Azure ポータルからログのメトリック アラートを作成した場�
 <br>
 
 #### Q. Azure ポータル上でメトリックに変換する scheduledQueryRules を表示したところ、Cannot read properties of undefined (reading 'toLowerCase') と表示されます。
-`scheduledQueryRules` はログをメトリックに変換する特殊なルールです。
-通常のログ アラート ルールの定義を持たないため、Azure ポータル上で開くと以下のエラーが表示されますが、ログのメトリック アラートでは必要なリソースとなるため、削除しないでください。
+`scheduledQueryRules` は、ログをメトリックに変換する専用のルールです。
+通常のログ アラート ルールの定義を持たないため、Azure ポータル上で開くと以下のエラーが表示されますが、アラートの動作不良を示すものではございません。
 <img width="700" src="../LogToMetricAlert/image13.png">
 
 <br>
