@@ -1,6 +1,6 @@
 ---
 title: ログのメトリック アラートについて
-date: 2026-09-11
+date: 2026-09-06
 tags:
   - Azure Monitor Essential
   - Alerts, Action Groups
@@ -9,7 +9,7 @@ tags:
 ---
 
 [更新履歴]
-- 2026/09/11 ブログ公開
+- 2026/09/06 ブログ公開
 
 こんにちは、Azure Monitoring サポート チームの北村です。
 Azure Monitor のアラート ルールの一つに「ログのメトリック アラート」というアラートが存在することをご存知でしょうか。
@@ -113,6 +113,13 @@ Azure ポータルからログのメトリック アラート (`metricAlerts`) �
 
 **1. Log Analytics ワークスペースに Heartbeat ログが収集されていることを確認する**
 前提として、[AMA で Log Analytics ワークスペースに Heartbeat や Perf を収集](https://learn.microsoft.com/ja-jp/azure/azure-monitor/vm/data-collection?tabs=default)していなければ、ログのメトリック アラートで監視することはできません。今回は、Heartbeat メトリックを監視するアラートを作成したいので、Log Analytics ワークスペース上で Heartbeat が収集されているかどうかを確認します。
+
+```
+// サンプル クエリ
+Heartbeat
+| where TimeGenerated > ago(1d)
+```
+
 ![](./LogToMetricAlert/image04.png)
 
 <br>
